@@ -74,7 +74,22 @@ class OmniCraft_AI_Generator_Engine {
 
 		$custom_primary   = ! empty( $params['custom_primary'] ) ? sanitize_hex_color( $params['custom_primary'] ) : '';
 		$custom_secondary = ! empty( $params['custom_secondary'] ) ? sanitize_hex_color( $params['custom_secondary'] ) : '';
-		$selected_sections = ! empty( $params['selected_sections'] ) && is_array( $params['selected_sections'] ) ? array_map( 'sanitize_text_field', $params['selected_sections'] ) : array();
+		
+		$selected_sections = array();
+		if ( ! empty( $params['selected_sections'] ) && is_array( $params['selected_sections'] ) ) {
+			foreach ( $params['selected_sections'] as $item ) {
+				if ( is_array( $item ) ) {
+					$selected_sections[] = array(
+						'type'        => ! empty( $item['type'] ) ? sanitize_text_field( $item['type'] ) : 'custom',
+						'tag'         => ! empty( $item['tag'] ) ? sanitize_text_field( $item['tag'] ) : '',
+						'title'       => ! empty( $item['title'] ) ? sanitize_text_field( $item['title'] ) : '',
+						'description' => ! empty( $item['description'] ) ? sanitize_text_field( $item['description'] ) : '',
+					);
+				} else {
+					$selected_sections[] = sanitize_text_field( $item );
+				}
+			}
+		}
 
 		// 4. Construct Multi-Modal Prompt
 		$system_prompt = self::build_system_prompt();
@@ -279,6 +294,43 @@ The JSON schema MUST follow this structure:
         { "question": "What security and compliance standards are supported?", "answer": "Enterprise-grade end-to-end encryption with SOC2, GDPR, and ISO27001 compliant architecture." },
         { "question": "Can we integrate with our existing stack?", "answer": "Yes, seamless RESTful APIs, webhooks, and turnkey connectors allow immediate integration with your tools." },
         { "question": "What level of support is included?", "answer": "All plans include 24/7 technical assistance, dedicated documentation, and live engineering support." }
+      ]
+    },
+    {
+      "type": "gallery",
+      "title": "Visual Showcase & Project Gallery",
+      "subtitle": "Explore our portfolio of high-impact executions.",
+      "items": [
+        { "title": "Next-Gen Analytics", "category": "Cloud Architecture", "image_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" },
+        { "title": "Mobile App Platform", "category": "Mobile Engineering", "image_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80" },
+        { "title": "Fintech Dashboard", "category": "UI/UX Strategy", "image_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80" },
+        { "title": "AI Neural Processor", "category": "Machine Learning", "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80" }
+      ]
+    },
+    {
+      "type": "map",
+      "title": "Visit Our Innovation Hub & Headquarters",
+      "subtitle": "Connect with our principal engineers and strategic consultants in person.",
+      "address": "100 Technology Way, Innovation District, Suite 500",
+      "phone": "+1 (555) 839-2041",
+      "email": "contact@company.com",
+      "hours": "Mon - Fri: 9:00 AM - 6:00 PM",
+      "map_query": "Silicon Valley, CA"
+    },
+    {
+      "type": "form",
+      "title": "Request a Strategy Blueprint",
+      "subtitle": "Tell us about your technical roadmap and get a custom execution proposal in 24 hours.",
+      "cta_text": "Submit Proposal Request"
+    },
+    {
+      "type": "team",
+      "title": "Leadership & Engineering Visionaries",
+      "subtitle": "World-class veterans dedicated to architectural excellence.",
+      "items": [
+        { "name": "Alexander Hayes", "role": "Chief Executive Officer & Founder", "bio": "Former VP of Engineering with 15+ years scaling distributed systems.", "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80" },
+        { "name": "Elena Rostova", "role": "Head of AI & Machine Learning", "bio": "PhD in Computer Vision specializing in scalable multi-modal models.", "image_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80" },
+        { "name": "Marcus Vance", "role": "Principal Cloud Architect", "bio": "Specialist in zero-latency microservices and global multi-region deployments.", "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80" }
       ]
     },
     {

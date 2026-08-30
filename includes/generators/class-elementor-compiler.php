@@ -80,11 +80,43 @@ class OmniCraft_AI_Elementor_Compiler {
 					break;
 
 				case 'slider':
-				case 'gallery':
 				case 'showcase':
-				case 'portfolio':
 				case 'carousel':
 					$elements[] = self::build_slider_section( $section, $primary_color, $secondary_color, $accent_color, $bg_light );
+					break;
+
+				case 'gallery':
+				case 'portfolio':
+					$elements[] = self::build_gallery_section( $section, $primary_color, $secondary_color, $bg_light, $text_dark );
+					break;
+
+				case 'map':
+				case 'location':
+					$elements[] = self::build_map_section( $section, $primary_color, $secondary_color, $bg_light, $text_dark );
+					break;
+
+				case 'form':
+				case 'multi_step_form':
+				case 'multistep':
+				case 'lead_form':
+					$elements[] = self::build_multi_step_form_section( $section, $primary_color, $secondary_color, $bg_light, $text_dark );
+					break;
+
+				case 'team':
+				case 'leadership':
+				case 'members':
+					$elements[] = self::build_team_section( $section, $primary_color, $secondary_color, $bg_light, $text_dark );
+					break;
+
+				case 'integrations':
+				case 'tools':
+				case 'ecosystem':
+					$elements[] = self::build_integrations_section( $section, $primary_color, $secondary_color, $bg_light, $text_dark );
+					break;
+
+				case 'timeline':
+				case 'roadmap':
+					$elements[] = self::build_timeline_section( $section, $primary_color, $secondary_color, $bg_light, $text_dark );
 					break;
 
 				case 'faq':
@@ -1122,6 +1154,525 @@ class OmniCraft_AI_Elementor_Compiler {
 								'speed'            => 500,
 								'navigation'       => 'both',
 								'thumbnail_size'   => 'full',
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Build Interactive Map & Location Headquarters Section
+	 */
+	private static function build_map_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
+		$title     = ! empty( $sec['title'] ) ? $sec['title'] : 'Our Global Headquarters';
+		$subtitle  = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Visit our engineering campus or schedule an on-site executive strategy session.';
+		$address   = ! empty( $sec['address'] ) ? $sec['address'] : '100 Innovation Boulevard, Tech District, Suite 400';
+		$phone     = ! empty( $sec['phone'] ) ? $sec['phone'] : '+1 (555) 234-5678';
+		$email     = ! empty( $sec['email'] ) ? $sec['email'] : 'contact@enterprise.com';
+		$hours     = ! empty( $sec['hours'] ) ? $sec['hours'] : 'Mon - Fri: 8:30 AM - 6:00 PM';
+		$map_query = ! empty( $sec['map_query'] ) ? $sec['map_query'] : 'Silicon Valley, California';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => '#ffffff',
+				'_css_id'               => 'location',
+				'_animation'            => 'fadeInUp',
+			),
+			'elements' => array(
+				// Left Info Column
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array(
+						'_column_size' => 45,
+						'padding'      => array( 'unit' => 'px', 'top' => 0, 'right' => 30, 'bottom' => 0, 'left' => 0, 'isLinked' => false ),
+					),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 32 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="color:#64748b; font-size:16px; line-height:1.6; margin-top:12px; margin-bottom:24px;">' . esc_html( $subtitle ) . '</p>' .
+									'<div style="display:flex; flex-direction:column; gap:16px; background:#f8fafc; padding:24px; border-radius:16px; border:1px solid #e2e8f0;">' .
+									'<div style="display:flex; align-items:flex-start; gap:14px;"><i class="fa-solid fa-location-dot" style="color:' . esc_attr( $primary ) . '; font-size:18px; margin-top:3px;"></i><div><strong style="color:#0f172a; display:block; font-size:14px;">Campus Address</strong><span style="color:#475569; font-size:14px;">' . esc_html( $address ) . '</span></div></div>' .
+									'<div style="display:flex; align-items:flex-start; gap:14px;"><i class="fa-solid fa-phone" style="color:' . esc_attr( $primary ) . '; font-size:18px; margin-top:3px;"></i><div><strong style="color:#0f172a; display:block; font-size:14px;">Phone Inquiries</strong><span style="color:#475569; font-size:14px;">' . esc_html( $phone ) . '</span></div></div>' .
+									'<div style="display:flex; align-items:flex-start; gap:14px;"><i class="fa-solid fa-envelope" style="color:' . esc_attr( $primary ) . '; font-size:18px; margin-top:3px;"></i><div><strong style="color:#0f172a; display:block; font-size:14px;">Direct Email</strong><span style="color:#475569; font-size:14px;">' . esc_html( $email ) . '</span></div></div>' .
+									'<div style="display:flex; align-items:flex-start; gap:14px;"><i class="fa-solid fa-clock" style="color:' . esc_attr( $primary ) . '; font-size:18px; margin-top:3px;"></i><div><strong style="color:#0f172a; display:block; font-size:14px;">Operating Hours</strong><span style="color:#475569; font-size:14px;">' . esc_html( $hours ) . '</span></div></div>' .
+									'</div>',
+							),
+						),
+					),
+				),
+				// Right Map Column
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array(
+						'_column_size' => 55,
+					),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'google_maps',
+							'settings'   => array(
+								'address' => $map_query,
+								'zoom'    => array( 'size' => 14 ),
+								'height'  => array( 'size' => 420 ),
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Build Interactive Multi-Step Lead Generation & Quote Form Section
+	 */
+	private static function build_multi_step_form_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Request an Executive Strategy Blueprint';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Complete this quick 3-step intake form to receive a tailored architecture proposal within 24 hours.';
+		$cta_text = ! empty( $sec['cta_text'] ) ? $sec['cta_text'] : 'Submit Proposal Request';
+
+		$form_html = '
+		<div style="background:#ffffff; border-radius:20px; box-shadow:0 20px 40px -15px rgba(0,0,0,0.08); border:1px solid #e2e8f0; padding:40px; max-width:760px; margin:0 auto;">
+			<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; border-bottom:1px solid #f1f5f9; padding-bottom:20px;">
+				<div style="display:flex; align-items:center; gap:8px;">
+					<span style="width:28px; height:28px; border-radius:50%; background:' . esc_attr( $primary ) . '; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">1</span>
+					<strong style="color:#0f172a; font-size:14px;">Contact Info</strong>
+				</div>
+				<span style="color:#cbd5e1;">———</span>
+				<div style="display:flex; align-items:center; gap:8px;">
+					<span style="width:28px; height:28px; border-radius:50%; background:#e2e8f0; color:#64748b; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">2</span>
+					<strong style="color:#64748b; font-size:14px;">Project Scope</strong>
+				</div>
+				<span style="color:#cbd5e1;">———</span>
+				<div style="display:flex; align-items:center; gap:8px;">
+					<span style="width:28px; height:28px; border-radius:50%; background:#e2e8f0; color:#64748b; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">3</span>
+					<strong style="color:#64748b; font-size:14px;">Budget & Timeline</strong>
+				</div>
+			</div>
+
+			<form onsubmit="event.preventDefault(); alert(\'Thank you! Your proposal request has been received.\');" style="display:flex; flex-direction:column; gap:20px;">
+				<div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+					<div>
+						<label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:6px;">Full Name *</label>
+						<input type="text" required placeholder="Sarah Jenkins" style="width:100%; padding:12px 16px; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box;">
+					</div>
+					<div>
+						<label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:6px;">Corporate Email *</label>
+						<input type="email" required placeholder="s.jenkins@company.com" style="width:100%; padding:12px 16px; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box;">
+					</div>
+				</div>
+
+				<div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+					<div>
+						<label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:6px;">Company / Organization</label>
+						<input type="text" placeholder="Acme Technologies" style="width:100%; padding:12px 16px; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box;">
+					</div>
+					<div>
+						<label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:6px;">Project Type</label>
+						<select style="width:100%; padding:12px 16px; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box; background:#fff;">
+							<option>Full Digital Transformation</option>
+							<option>Custom Cloud Architecture</option>
+							<option>AI & Machine Learning Integration</option>
+							<option>Mobile & Web Engineering</option>
+						</select>
+					</div>
+				</div>
+
+				<div>
+					<label style="display:block; font-size:13px; font-weight:600; color:#334155; margin-bottom:6px;">Project Objectives & Timeline</label>
+					<textarea rows="3" placeholder="Tell us about your core technical requirements, current stack, and target launch window..." style="width:100%; padding:12px 16px; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box;"></textarea>
+				</div>
+
+				<div style="text-align:center; margin-top:10px;">
+					<button type="submit" style="background:' . esc_attr( $primary ) . '; color:#ffffff; border:none; padding:16px 36px; border-radius:10px; font-weight:700; font-size:16px; cursor:pointer; box-shadow:0 10px 25px rgba(99,102,241,0.25); transition:transform 0.2s;">
+						' . esc_html( $cta_text ) . ' <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i>
+					</button>
+				</div>
+			</form>
+		</div>';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => $bg_light,
+				'_css_id'               => 'form-step',
+				'_animation'            => 'fadeInUp',
+			),
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 35px auto;">' . esc_html( $subtitle ) . '</p>' . $form_html,
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Build High-Resolution Visual Project Gallery Section
+	 */
+	private static function build_gallery_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Featured Execution Gallery';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'A curated portfolio of high-performance builds, scalable designs, and enterprise platforms.';
+		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+
+		$default_gallery = array(
+			array( 'title' => 'Cloud Infrastructure', 'category' => 'Architecture', 'image_url' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80' ),
+			array( 'title' => 'Mobile Banking Experience', 'category' => 'Mobile App', 'image_url' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80' ),
+			array( 'title' => 'AI Analytics Hub', 'category' => 'Machine Learning', 'image_url' => 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80' ),
+			array( 'title' => 'SaaS Dashboard Redesign', 'category' => 'UI/UX Strategy', 'image_url' => 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&auto=format&fit=crop&q=80' ),
+		);
+
+		if ( empty( $items ) ) {
+			$items = $default_gallery;
+		}
+
+		$gallery_cards_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px; margin-top:30px;">';
+		foreach ( $items as $item ) {
+			$img = ! empty( $item['image_url'] ) ? $item['image_url'] : $default_gallery[0]['image_url'];
+			$item_title = ! empty( $item['title'] ) ? $item['title'] : 'Project Showcase';
+			$cat = ! empty( $item['category'] ) ? $item['category'] : 'Digital Solution';
+
+			$gallery_cards_html .= '
+			<div style="border-radius:16px; overflow:hidden; background:#ffffff; box-shadow:0 10px 25px rgba(0,0,0,0.06); border:1px solid #e2e8f0; transition:all 0.3s ease;">
+				<div style="height:200px; overflow:hidden; position:relative;">
+					<img src="' . esc_url( $img ) . '" alt="' . esc_attr( $item_title ) . '" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;">
+					<span style="position:absolute; top:12px; left:12px; background:rgba(15,23,42,0.75); backdrop-filter:blur(4px); color:#fff; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px;">' . esc_html( $cat ) . '</span>
+				</div>
+				<div style="padding:18px;">
+					<h4 style="margin:0 0 6px 0; color:#0f172a; font-size:17px; font-weight:700;">' . esc_html( $item_title ) . '</h4>
+					<span style="color:' . esc_attr( $primary ) . '; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:6px;">View Case Study <i class="fa-solid fa-arrow-right" style="font-size:11px;"></i></span>
+				</div>
+			</div>';
+		}
+		$gallery_cards_html .= '</div>';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => '#ffffff',
+				'_css_id'               => 'gallery',
+				'_animation'            => 'fadeInUp',
+			),
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 20px auto;">' . esc_html( $subtitle ) . '</p>' . $gallery_cards_html,
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Build Leadership & Team Members Showcase Section
+	 */
+	private static function build_team_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Meet Our Leadership & Engineering Team';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Seasoned executives and principal architects driving technological breakthroughs.';
+		$members  = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+
+		$default_members = array(
+			array( 'name' => 'Alexander Hayes', 'role' => 'Founder & CEO', 'bio' => '15+ years scaling enterprise architectures and distributed software platforms.', 'image_url' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80' ),
+			array( 'name' => 'Dr. Elena Rostova', 'role' => 'Head of AI Research', 'bio' => 'PhD in Computer Vision specializing in multi-modal generative intelligence.', 'image_url' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80' ),
+			array( 'name' => 'Marcus Vance', 'role' => 'VP of Cloud Infrastructure', 'bio' => 'Specialist in zero-latency microservices, Kubernetes, and global hybrid cloud.', 'image_url' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80' ),
+		);
+
+		if ( empty( $members ) ) {
+			$members = $default_members;
+		}
+
+		$team_cards_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px; margin-top:35px;">';
+		foreach ( $members as $m ) {
+			$name = ! empty( $m['name'] ) ? $m['name'] : 'Team Member';
+			$role = ! empty( $m['role'] ) ? $m['role'] : 'Principal Engineer';
+			$bio  = ! empty( $m['bio'] ) ? $m['bio'] : 'Dedicated to software excellence and scalable systems.';
+			$img  = ! empty( $m['image_url'] ) ? $m['image_url'] : $default_members[0]['image_url'];
+
+			$team_cards_html .= '
+			<div style="background:#ffffff; border-radius:18px; padding:28px; text-align:center; border:1px solid #e2e8f0; box-shadow:0 10px 25px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+				<img src="' . esc_url( $img ) . '" alt="' . esc_attr( $name ) . '" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin-bottom:16px; border:3px solid ' . esc_attr( $primary ) . ';">
+				<h4 style="margin:0 0 4px 0; font-size:18px; font-weight:700; color:#0f172a;">' . esc_html( $name ) . '</h4>
+				<span style="color:' . esc_attr( $primary ) . '; font-size:13px; font-weight:600; display:block; margin-bottom:12px;">' . esc_html( $role ) . '</span>
+				<p style="color:#64748b; font-size:13.5px; line-height:1.6; margin:0 0 16px 0;">' . esc_html( $bio ) . '</p>
+				<div style="display:flex; justify-content:center; gap:12px; color:#94a3b8; font-size:15px;"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-x-twitter"></i><i class="fa-brands fa-github"></i></div>
+			</div>';
+		}
+		$team_cards_html .= '</div>';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => $bg_light,
+				'_css_id'               => 'team',
+				'_animation'            => 'fadeInUp',
+			),
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 20px auto;">' . esc_html( $subtitle ) . '</p>' . $team_cards_html,
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Build Ecosystem & Tool Integrations Section
+	 */
+	private static function build_integrations_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Enterprise Ecosystem & Tool Connectors';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Connect seamlessly with 50+ enterprise services, databases, and CI/CD pipelines.';
+		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+
+		$default_tools = array(
+			array( 'name' => 'Slack & Teams', 'desc' => 'Real-time incident and event alerts delivered directly to your chat channels.' ),
+			array( 'name' => 'Salesforce & HubSpot', 'desc' => 'Instant bi-directional customer sync and pipeline automation.' ),
+			array( 'name' => 'GitHub & GitLab', 'desc' => 'Automated deployment pipelines and PR preview environments.' ),
+			array( 'name' => 'AWS & Google Cloud', 'desc' => 'Multi-region cloud infrastructure with auto-scaling microservices.' ),
+			array( 'name' => 'Stripe & Paddle', 'desc' => 'Global payment gateways, tax compliance, and automated billing sync.' ),
+			array( 'name' => 'PostgreSQL & Snowflake', 'desc' => 'High-throughput data pipelines and enterprise analytics data lakes.' ),
+		);
+
+		if ( empty( $items ) ) {
+			$items = $default_tools;
+		}
+
+		$cards_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-top:35px;">';
+		foreach ( $items as $tool ) {
+			$name = ! empty( $tool['name'] ) ? $tool['name'] : ( ! empty( $tool['title'] ) ? $tool['title'] : 'Integration Tool' );
+			$desc = ! empty( $tool['desc'] ) ? $tool['desc'] : ( ! empty( $tool['description'] ) ? $tool['description'] : 'Seamless 1-click cloud sync and webhook support.' );
+
+			$cards_html .= '
+			<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:14px; padding:22px; display:flex; align-items:flex-start; gap:16px; box-shadow:0 4px 15px rgba(0,0,0,0.03); transition:all 0.2s ease;">
+				<div style="width:40px; height:40px; border-radius:10px; background:' . esc_attr( $primary ) . '15; color:' . esc_attr( $primary ) . '; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;"><i class="fa-solid fa-bolt"></i></div>
+				<div>
+					<h4 style="margin:0 0 4px 0; font-size:16px; font-weight:700; color:#0f172a;">' . esc_html( $name ) . '</h4>
+					<p style="margin:0; font-size:13px; color:#64748b; line-height:1.5;">' . esc_html( $desc ) . '</p>
+				</div>
+			</div>';
+		}
+		$cards_html .= '</div>';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => '#ffffff',
+				'_css_id'               => 'integrations',
+				'_animation'            => 'fadeInUp',
+			),
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 20px auto;">' . esc_html( $subtitle ) . '</p>' . $cards_html,
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Build Step-by-Step Roadmap & Timeline Section
+	 */
+	private static function build_timeline_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Execution Roadmap & Milestones';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'A phased blueprint for predictable, high-speed project delivery.';
+		$steps    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+
+		$default_steps = array(
+			array( 'phase' => 'Phase 01', 'title' => 'Discovery & Technical Audit', 'description' => 'Comprehensive analysis of existing architecture, requirements, and KPI goals.' ),
+			array( 'phase' => 'Phase 02', 'title' => 'Prototyping & Architecture Design', 'description' => 'High-fidelity wireframes, UI design systems, and cloud schema definition.' ),
+			array( 'phase' => 'Phase 03', 'title' => 'Engineering & Continuous Integration', 'description' => 'Agile sprints with automated test coverage and weekly staging deployments.' ),
+			array( 'phase' => 'Phase 04', 'title' => 'Production Launch & Scale', 'description' => 'Zero-downtime deployment, performance tuning, and 24/7 observability monitoring.' ),
+		);
+
+		if ( empty( $steps ) ) {
+			$steps = $default_steps;
+		}
+
+		$timeline_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:24px; margin-top:40px;">';
+		foreach ( $steps as $i => $st ) {
+			$phase = ! empty( $st['phase'] ) ? $st['phase'] : 'Step 0' . ( $i + 1 );
+			$st_title = ! empty( $st['title'] ) ? $st['title'] : 'Milestone Objective';
+			$st_desc  = ! empty( $st['description'] ) ? $st['description'] : 'Comprehensive execution step.';
+
+			$timeline_html .= '
+			<div style="background:#ffffff; border-radius:16px; padding:26px; border:1px solid #e2e8f0; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.04);">' .
+				'<span style="background:' . esc_attr( $primary ) . '; color:#ffffff; font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; display:inline-block; margin-bottom:14px;">' . esc_html( $phase ) . '</span>' .
+				'<h4 style="margin:0 0 8px 0; font-size:17px; font-weight:700; color:#0f172a;">' . esc_html( $st_title ) . '</h4>' .
+				'<p style="margin:0; font-size:13.5px; color:#64748b; line-height:1.6;">' . esc_html( $st_desc ) . '</p>' .
+			'</div>';
+		}
+		$timeline_html .= '</div>';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => $bg_light,
+				'_css_id'               => 'roadmap',
+				'_animation'            => 'fadeInUp',
+			),
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 20px auto;">' . esc_html( $subtitle ) . '</p>' . $timeline_html,
 							),
 						),
 					),

@@ -558,8 +558,14 @@ $default_bldr = ! empty( $options['default_builder'] ) ? $options['default_build
 					<label for="oc-modal-sec-type"><?php esc_html_e( 'Section Type / Template Base', 'omnicraft-ai-builder' ); ?></label>
 					<select id="oc-modal-sec-type" class="oc-select">
 						<option value="custom"><?php esc_html_e( 'Custom Section (Adaptive Cards & Grid)', 'omnicraft-ai-builder' ); ?></option>
+						<option value="map"><?php esc_html_e( 'Map & Location / Campus Headquarters', 'omnicraft-ai-builder' ); ?></option>
+						<option value="form"><?php esc_html_e( 'Interactive Multi-Step Lead / Quote Form', 'omnicraft-ai-builder' ); ?></option>
+						<option value="gallery"><?php esc_html_e( 'Visual Project / Photo Gallery Grid', 'omnicraft-ai-builder' ); ?></option>
+						<option value="team"><?php esc_html_e( 'Leadership & Team Member Showcase', 'omnicraft-ai-builder' ); ?></option>
+						<option value="integrations"><?php esc_html_e( 'Enterprise Ecosystem & Tool Connectors', 'omnicraft-ai-builder' ); ?></option>
+						<option value="timeline"><?php esc_html_e( 'Execution Roadmap & Milestones Timeline', 'omnicraft-ai-builder' ); ?></option>
+						<option value="slider"><?php esc_html_e( 'Project Carousel Slider', 'omnicraft-ai-builder' ); ?></option>
 						<option value="features"><?php esc_html_e( 'Feature / Solution Cards Grid', 'omnicraft-ai-builder' ); ?></option>
-						<option value="slider"><?php esc_html_e( 'Project / Showcase Carousel Slider', 'omnicraft-ai-builder' ); ?></option>
 						<option value="stats"><?php esc_html_e( 'Performance Metrics / Counters', 'omnicraft-ai-builder' ); ?></option>
 						<option value="about"><?php esc_html_e( 'Story / Narrative with Image', 'omnicraft-ai-builder' ); ?></option>
 						<option value="testimonials"><?php esc_html_e( 'Reviews & Social Proof', 'omnicraft-ai-builder' ); ?></option>

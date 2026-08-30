@@ -69,11 +69,43 @@ class OmniCraft_AI_Gutenberg_Compiler {
 					break;
 
 				case 'slider':
-				case 'gallery':
 				case 'showcase':
-				case 'portfolio':
 				case 'carousel':
 					$output .= self::build_slider_block( $section, $primary_color, $secondary_color, $bg_light );
+					break;
+
+				case 'gallery':
+				case 'portfolio':
+					$output .= self::build_gallery_block( $section, $primary_color, $secondary_color, $bg_light );
+					break;
+
+				case 'map':
+				case 'location':
+					$output .= self::build_map_block( $section, $primary_color, $secondary_color, $bg_light );
+					break;
+
+				case 'form':
+				case 'multi_step_form':
+				case 'multistep':
+				case 'lead_form':
+					$output .= self::build_multi_step_form_block( $section, $primary_color, $secondary_color, $bg_light );
+					break;
+
+				case 'team':
+				case 'leadership':
+				case 'members':
+					$output .= self::build_team_block( $section, $primary_color, $secondary_color, $bg_light );
+					break;
+
+				case 'integrations':
+				case 'tools':
+				case 'ecosystem':
+					$output .= self::build_integrations_block( $section, $primary_color, $secondary_color, $bg_light );
+					break;
+
+				case 'timeline':
+				case 'roadmap':
+					$output .= self::build_timeline_block( $section, $primary_color, $secondary_color, $bg_light );
 					break;
 
 				case 'faq':
@@ -556,5 +588,114 @@ class OmniCraft_AI_Gutenberg_Compiler {
 <!-- /wp:columns -->
 </div>
 <!-- /wp:group -->';
+	}
+
+	private static function build_map_block( $sec, $primary, $secondary, $bg_light ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Our Global Campus & Location';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Visit our executive innovation center.';
+		$address  = ! empty( $sec['address'] ) ? $sec['address'] : '100 Innovation Boulevard, Suite 400';
+		$phone    = ! empty( $sec['phone'] ) ? $sec['phone'] : '+1 (555) 234-5678';
+		$email    = ! empty( $sec['email'] ) ? $sec['email'] : 'contact@enterprise.com';
+		$hours    = ! empty( $sec['hours'] ) ? $sec['hours'] : 'Mon - Fri: 8:30 AM - 6:00 PM';
+
+		return '<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px","left":"30px","right":"30px"}}},"layout":{"type":"constrained"}} -->
+<div id="location" class="wp-block-group alignfull" style="padding-top:80px;padding-right:30px;padding-bottom:80px;padding-left:30px">
+<!-- wp:columns {"align":"wide"} -->
+<div class="wp-block-columns alignwide">
+<div class="wp-block-column" style="padding-right:30px">
+<h2 class="wp-block-heading" style="color:' . esc_attr( $secondary ) . ';font-size:32px;font-weight:800;margin:0 0 12px 0;">' . esc_html( $title ) . '</h2>
+<p style="color:#64748b;font-size:16px;line-height:1.6;margin-bottom:24px;">' . esc_html( $subtitle ) . '</p>
+<div style="background:#f8fafc;padding:24px;border-radius:16px;border:1px solid #e2e8f0;">
+<p style="margin:0 0 12px 0;"><strong>Address:</strong> ' . esc_html( $address ) . '</p>
+<p style="margin:0 0 12px 0;"><strong>Phone:</strong> ' . esc_html( $phone ) . '</p>
+<p style="margin:0 0 12px 0;"><strong>Email:</strong> ' . esc_html( $email ) . '</p>
+<p style="margin:0;"><strong>Hours:</strong> ' . esc_html( $hours ) . '</p>
+</div>
+</div>
+<div class="wp-block-column">
+<div style="width:100%;height:380px;border-radius:16px;overflow:hidden;background:#e2e8f0;display:flex;align-items:center;justify-content:center;">
+<iframe width="100%" height="100%" frameborder="0" style="border:0;" src="https://maps.google.com/maps?q=Silicon%20Valley&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</div>
+</div>
+</div>
+<!-- /wp:columns -->
+</div>
+<!-- /wp:group -->';
+	}
+
+	private static function build_multi_step_form_block( $sec, $primary, $secondary, $bg_light ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Request an Executive Strategy Blueprint';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Complete this quick form to receive a tailored architecture proposal within 24 hours.';
+		$cta_text = ! empty( $sec['cta_text'] ) ? $sec['cta_text'] : 'Submit Proposal Request';
+
+		return '<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px","left":"30px","right":"30px"}},"color":{"background":"' . esc_attr( $bg_light ) . '"}},"layout":{"type":"constrained"}} -->
+<div id="form-step" class="wp-block-group alignfull has-background" style="background-color:' . esc_attr( $bg_light ) . ';padding-top:80px;padding-right:30px;padding-bottom:80px;padding-left:30px">
+<h2 class="wp-block-heading has-text-align-center" style="color:' . esc_attr( $secondary ) . ';font-size:36px;font-weight:800;margin:0;text-align:center;">' . esc_html( $title ) . '</h2>
+<p class="has-text-align-center" style="color:#64748b;font-size:17px;margin:10px auto 35px auto;text-align:center;max-width:650px;">' . esc_html( $subtitle ) . '</p>
+<div style="background:#ffffff;border-radius:20px;box-shadow:0 20px 40px -15px rgba(0,0,0,0.08);border:1px solid #e2e8f0;padding:36px;max-width:700px;margin:0 auto;">
+<form onsubmit="event.preventDefault(); alert(\'Proposal request received!\');" style="display:flex;flex-direction:column;gap:16px;">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+<div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Full Name *</label><input type="text" required placeholder="Sarah Jenkins" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box;" /></div>
+<div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Work Email *</label><input type="email" required placeholder="s.jenkins@company.com" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box;" /></div>
+</div>
+<div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Requirements</label><textarea rows="3" placeholder="Tell us about your project..." style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box;"></textarea></div>
+<div style="text-align:center;margin-top:8px;"><button type="submit" style="background:' . esc_attr( $primary ) . ';color:#fff;border:none;padding:14px 32px;border-radius:8px;font-weight:700;cursor:pointer;">' . esc_html( $cta_text ) . '</button></div>
+</form>
+</div>
+</div>
+<!-- /wp:group -->';
+	}
+
+	private static function build_gallery_block( $sec, $primary, $secondary, $bg_light ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Featured Execution Gallery';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'A curated portfolio of high-performance builds.';
+		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+
+		return self::build_slider_block( array( 'title' => $title, 'subtitle' => $subtitle, 'items' => $items ), $primary, $secondary, $bg_light );
+	}
+
+	private static function build_team_block( $sec, $primary, $secondary, $bg_light ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Leadership & Engineering Visionaries';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Seasoned executives driving technological breakthroughs.';
+		$members  = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+
+		$cols = '';
+		foreach ( array_slice( $members, 0, 3 ) as $m ) {
+			$name = ! empty( $m['name'] ) ? $m['name'] : 'Executive';
+			$role = ! empty( $m['role'] ) ? $m['role'] : 'Leader';
+			$bio  = ! empty( $m['bio'] ) ? $m['bio'] : 'Dedicated to engineering excellence.';
+			$img  = ! empty( $m['image_url'] ) ? $m['image_url'] : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80';
+
+			$cols .= '<!-- wp:column {"style":{"spacing":{"padding":{"top":"24px","bottom":"24px","left":"20px","right":"20px"}},"color":{"background":"#ffffff"},"border":{"radius":"16px"}}} -->
+<div class="wp-block-column has-background" style="background-color:#ffffff;border-radius:16px;text-align:center;padding:24px 20px;border:1px solid #e2e8f0;box-shadow:0 6px 18px rgba(0,0,0,0.04);">
+<img src="' . esc_url( $img ) . '" alt="' . esc_attr( $name ) . '" style="width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:12px;border:3px solid ' . esc_attr( $primary ) . ';" />
+<h4 style="color:#0f172a;font-size:18px;font-weight:700;margin:0 0 4px 0;">' . esc_html( $name ) . '</h4>
+<span style="color:' . esc_attr( $primary ) . ';font-size:13px;font-weight:600;display:block;margin-bottom:10px;">' . esc_html( $role ) . '</span>
+<p style="color:#64748b;font-size:13.5px;line-height:1.5;margin:0;">' . esc_html( $bio ) . '</p>
+</div>
+<!-- /wp:column -->';
+		}
+
+		return '<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px","left":"30px","right":"30px"}},"color":{"background":"' . esc_attr( $bg_light ) . '"}},"layout":{"type":"constrained"}} -->
+<div id="team" class="wp-block-group alignfull has-background" style="background-color:' . esc_attr( $bg_light ) . ';padding-top:80px;padding-right:30px;padding-bottom:80px;padding-left:30px">
+<h2 class="wp-block-heading has-text-align-center" style="color:' . esc_attr( $secondary ) . ';font-size:36px;font-weight:800;margin:0;text-align:center;">' . esc_html( $title ) . '</h2>
+<p class="has-text-align-center" style="color:#64748b;font-size:17px;margin:10px auto 35px auto;text-align:center;max-width:650px;">' . esc_html( $subtitle ) . '</p>
+<!-- wp:columns {"align":"wide"} -->
+<div class="wp-block-columns alignwide">' . $cols . '</div>
+<!-- /wp:columns -->
+</div>
+<!-- /wp:group -->';
+	}
+
+	private static function build_integrations_block( $sec, $primary, $secondary, $bg_light ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Enterprise Ecosystem & Connectors';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Connect seamlessly with 50+ enterprise services.';
+		return self::build_features_block( array( 'title' => $title, 'subtitle' => $subtitle, 'items' => ( $sec['items'] ?? array() ) ), $primary, $secondary, $bg_light );
+	}
+
+	private static function build_timeline_block( $sec, $primary, $secondary, $bg_light ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Execution Roadmap';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'A phased blueprint for predictable project delivery.';
+		return self::build_features_block( array( 'title' => $title, 'subtitle' => $subtitle, 'items' => ( $sec['items'] ?? array() ) ), $primary, $secondary, $bg_light );
 	}
 }
