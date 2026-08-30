@@ -1,0 +1,211 @@
+/**
+ * OmniCraft AI Frontend Animation & Interactive Motion Stylesheet
+ * High-performance, GPU-accelerated CSS animations and scroll reveal effects.
+ */
+
+/* Keyframe Definitions */
+@keyframes omniFadeInUp {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 35px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes omniFadeInDown {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -30px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes omniFadeInLeft {
+	from {
+		opacity: 0;
+		transform: translate3d(-40px, 0, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes omniFadeInRight {
+	from {
+		opacity: 0;
+		transform: translate3d(40px, 0, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes omniFloat {
+	0%, 100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes omniPulse {
+	0%, 100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.05);
+		opacity: 0.9;
+	}
+}
+
+@keyframes omniGlow {
+	0%, 100% {
+		box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+	}
+	50% {
+		box-shadow: 0 0 30px rgba(99, 102, 241, 0.45);
+	}
+}
+
+@keyframes omniShimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+/* Scroll-Reveal Base Classes */
+.omni-reveal {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+
+.omni-reveal.omni-revealed {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.omni-reveal-left {
+	opacity: 0;
+	transform: translateX(-40px);
+	transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.omni-reveal-left.omni-revealed {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.omni-reveal-right {
+	opacity: 0;
+	transform: translateX(40px);
+	transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.omni-reveal-right.omni-revealed {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/* Stagger Delays */
+.omni-delay-100 { transition-delay: 0.1s; }
+.omni-delay-200 { transition-delay: 0.2s; }
+.omni-delay-300 { transition-delay: 0.3s; }
+.omni-delay-400 { transition-delay: 0.4s; }
+.omni-delay-500 { transition-delay: 0.5s; }
+
+/* Interactive Hover Animations */
+.elementor-column:hover,
+.wp-block-column:hover,
+.oc-hover-card:hover {
+	transform: translateY(-6px) !important;
+	box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12) !important;
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.elementor-column,
+.wp-block-column,
+.oc-hover-card {
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Button Pulse & Hover Effects */
+.elementor-button,
+.wp-element-button {
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.elementor-button:hover,
+.wp-element-button:hover {
+	transform: translateY(-3px) scale(1.02) !important;
+	box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4) !important;
+}
+
+/* Hero Floating Image Effect */
+.elementor-widget-image img,
+.wp-block-image img {
+	animation: omniFloat 6s ease-in-out infinite !important;
+}
+
+/* Badge Glow & Pulse */
+.omni-badge,
+span[style*="border-radius: 999px"],
+p[style*="border-radius:999px"],
+span[style*="border-radius:999px"] {
+	animation: omniPulse 3s ease-in-out infinite;
+}
+
+/* Image Carousel / Slider Transition & Touch Styling */
+.elementor-image-carousel-wrapper,
+.swiper-container {
+	padding: 15px 0 35px 0 !important;
+}
+
+.elementor-image-carousel .swiper-slide img {
+	border-radius: 14px !important;
+	transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+.elementor-image-carousel .swiper-slide:hover img {
+	transform: scale(1.04) !important;
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Elementor Native Animation Fallback Classes */
+.elementor-invisible {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+.animated {
+	animation-duration: 0.8s;
+	animation-fill-mode: both;
+}
+
+.fadeInUp {
+	animation-name: omniFadeInUp;
+}
+
+.fadeInLeft {
+	animation-name: omniFadeInLeft;
+}
+
+.fadeInRight {
+	animation-name: omniFadeInRight;
+}
+
+.fadeInDown {
+	animation-name: omniFadeInDown;
+}
