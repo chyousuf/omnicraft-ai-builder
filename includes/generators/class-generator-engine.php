@@ -23,8 +23,9 @@ class OmniCraft_AI_Generator_Engine {
 	 * @param array $params
 	 * @return array|WP_Error
 	 */
-	public static function generate( $params ) {
-		$user_id = get_current_user_id();
+	public static function generate( $params = array() ) {
+		@set_time_limit( 180 );
+		$user_id = get_current_user_id() ? get_current_user_id() : 1;
 
 		// 1. Check Credits / Limits
 		$limit_check = OmniCraft_AI_Credits_Manager::check_user_limit( $user_id );

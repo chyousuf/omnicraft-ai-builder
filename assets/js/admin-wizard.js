@@ -204,7 +204,28 @@
 	 * Main Generation Stepper & Submission
 	 */
 	function initGenerator() {
+		let progressTimer = null;
+		let elapsedSeconds = 0;
+
+		function showError(title, message) {
+			$('#oc-error-title').text(title);
+			$('#oc-error-message').text(message);
+			$('#oc-error-banner').css('display', 'flex').hide().fadeIn(200);
+			$('html, body').animate({
+				scrollTop: $('#oc-error-banner').offset().top - 40
+			}, 300);
+		}
+
+		function clearError() {
+			$('#oc-error-banner').fadeOut(150);
+		}
+
+		$(document).on('click', '#oc-error-close-btn', function () {
+			clearError();
+		});
+
 		$('#oc-btn-generate').on('click', function () {
+			clearError();
 			const title = $('#oc-page-title').val().trim();
 			const prompt = $('#oc-prompt').val().trim();
 			const targetUrl = $('#oc-target-url').val().trim();
@@ -225,40 +246,54 @@
 			});
 
 			if (!title) {
-				alert('Please enter a Page Name / Business Title.');
+				showError('Page Name Missing', 'Please enter a Page Name / Business Title before generating.');
 				$('#oc-page-title').focus();
 				return;
 			}
 
 			if (!prompt && !targetUrl && !uploadedImageBase64) {
-				alert('Please provide at least one input: a business description, reference URL, or design screenshot.');
+				showError('Missing Input Content', 'Please provide at least one input: a business description, reference website URL, or design screenshot.');
 				return;
 			}
 
 			if (selectedSections.length === 0) {
-				alert('Please select at least one section to generate.');
+				showError('No Sections Selected', 'Please select at least one section in Step 4 to generate.');
 				return;
 			}
 
 			const $btn = $(this);
-			$btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> Generating Website...');
+			$btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> Generating Website (1s)...');
 
-			// Show Progress Stepper Card with dynamically highlighted section steps
+			elapsedSeconds = 1;
+			if (progressTimer) clearInterval(progressTimer);
+			progressTimer = setInterval(function () {
+				elapsedSeconds++;
+				$btn.html('<i class="fa-solid fa-spinner fa-spin"></i> Generating Website (' + elapsedSeconds + 's)...');
+			}, 1000);
+
+			// Show Progress Stepper Card
 			$('#oc-result-card').hide();
-			$('#oc-progress-card').slideDown();
+			$('#oc-progress-card').slideDown(200);
 			resetStepper();
+
+			// Auto-scroll sidebar into view on mobile/tablet
+			if ($(window).width() < 1024) {
+				$('html, body').animate({
+					scrollTop: $('#oc-progress-card').offset().top - 20
+				}, 300);
+			}
 
 			// Stepper animation timeline
 			stepActive('#step-analyze');
 			setTimeout(function () {
 				stepDone('#step-analyze');
 				stepActive('#step-scrape');
-			}, 2000);
+			}, 1800);
 
 			setTimeout(function () {
 				stepDone('#step-scrape');
 				stepActive('#step-copy');
-			}, 4500);
+			}, 4000);
 
 			setTimeout(function () {
 				stepDone('#step-copy');
@@ -289,6 +324,7 @@
 				data: JSON.stringify(payload),
 				timeout: 180000, // 3 minutes
 				success: function (res) {
+					if (progressTimer) clearInterval(progressTimer);
 					$btn.prop('disabled', false).html('<i class="fa-solid fa-wand-magic-sparkles"></i> Generate Complete Website');
 					stepDone('#step-compile');
 					stepActive('#step-publish');
@@ -298,9 +334,9 @@
 						$('#oc-progress-card').slideUp(300, function () {
 							// Show Result Card
 							$('#oc-result-page-title').text(res.page_title || title);
-							$('#oc-btn-edit-elementor').attr('href', res.elementor_edit_url);
-							$('#oc-btn-view-live').attr('href', res.view_url);
-							$('#oc-btn-edit-wp').attr('href', res.edit_url);
+							$('#oc-btn-edit-elementor').attr('href', res.elementor_edit_url || '#');
+							$('#oc-btn-view-live').attr('href', res.view_url || '#');
+							$('#oc-btn-edit-wp').attr('href', res.edit_url || '#');
 
 							if (res.builder_type !== 'elementor') {
 								$('#oc-btn-edit-elementor').hide();
@@ -313,10 +349,18 @@
 					}, 800);
 				},
 				error: function (xhr) {
+					if (progressTimer) clearInterval(progressTimer);
 					$btn.prop('disabled', false).html('<i class="fa-solid fa-wand-magic-sparkles"></i> Generate Complete Website');
 					$('#oc-progress-card').hide();
-					const err = xhr.responseJSON ? xhr.responseJSON.message : 'Generation failed. Check your API settings.';
-					alert('Generation Error: ' + err);
+
+					let errorMsg = 'Generation failed. Please verify your AI provider settings and try again.';
+					if (xhr.responseJSON && xhr.responseJSON.message) {
+						errorMsg = xhr.responseJSON.message;
+					} else if (xhr.statusText === 'timeout') {
+						errorMsg = 'Request timed out. The server or AI provider took too long to respond. Please try again.';
+					}
+
+					showError('Generation Encountered an Issue', errorMsg);
 				}
 			});
 		});

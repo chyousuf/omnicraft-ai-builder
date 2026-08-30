@@ -57,6 +57,16 @@ $default_bldr = ! empty( $options['default_builder'] ) ? $options['default_build
 	<div class="omnicraft-grid">
 		<!-- Left / Main Form Column -->
 		<div class="omnicraft-main-card">
+			<!-- In-page Notification / Error Banner -->
+			<div id="oc-error-banner" class="oc-alert-danger" style="display:none; margin-bottom: 24px; padding: 16px 20px; border-radius: 12px; background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; font-size: 14px; display: none; align-items: flex-start; gap: 12px;">
+				<i class="fa-solid fa-circle-exclamation" style="font-size: 18px; margin-top: 2px; flex-shrink:0;"></i>
+				<div style="flex:1;">
+					<strong style="display:block; margin-bottom:4px; font-weight:700;" id="oc-error-title">Generation Error</strong>
+					<span id="oc-error-message">Error details...</span>
+				</div>
+				<button type="button" id="oc-error-close-btn" style="background:transparent; border:none; color:#991b1b; cursor:pointer; font-size:18px; line-height:1;">&times;</button>
+			</div>
+
 			<form id="omnicraft-generator-form" onsubmit="return false;">
 				
 				<!-- Section 1: Business Identity -->

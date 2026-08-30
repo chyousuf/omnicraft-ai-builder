@@ -33,8 +33,8 @@ class OmniCraft_AI_URL_Scraper {
 		}
 
 		$args = array(
-			'timeout'     => 15,
-			'redirection' => 5,
+			'timeout'     => 5,
+			'redirection' => 3,
 			'httpversion' => '1.1',
 			'user-agent'  => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 OmniCraftBot/1.0',
 			'sslverify'   => false,
@@ -180,7 +180,7 @@ class OmniCraft_AI_URL_Scraper {
 						if ( 0 !== strpos( $js_url, 'http' ) ) {
 							$js_url = rtrim( $url, '/' ) . '/' . ltrim( $js_url, '/' );
 						}
-						$js_res = wp_safe_remote_get( $js_url, array( 'timeout' => 8, 'sslverify' => false ) );
+						$js_res = wp_safe_remote_get( $js_url, array( 'timeout' => 3, 'sslverify' => false ) );
 						if ( ! is_wp_error( $js_res ) && 200 === wp_remote_retrieve_response_code( $js_res ) ) {
 							$js_content = wp_remote_retrieve_body( $js_res );
 							preg_match_all( '/[\x22\x27]([A-Z][A-Za-z0-9\s,&–—]{6,60})[\x22\x27]/', $js_content, $str_matches );
