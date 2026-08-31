@@ -207,6 +207,18 @@
 		let progressTimer = null;
 		let elapsedSeconds = 0;
 
+		function resetStepper() {
+			$('.oc-step-item').removeClass('active done');
+		}
+
+		function stepActive(selector) {
+			$(selector).addClass('active').removeClass('done');
+		}
+
+		function stepDone(selector) {
+			$(selector).addClass('done').removeClass('active');
+		}
+
 		function showError(title, message) {
 			$('#oc-error-title').text(title);
 			$('#oc-error-message').text(message);
@@ -226,7 +238,7 @@
 
 		$('#oc-btn-generate').on('click', function () {
 			clearError();
-			const title = $('#oc-page-title').val().trim();
+			let title = $('#oc-page-title').val().trim();
 			const prompt = $('#oc-prompt').val().trim();
 			const targetUrl = $('#oc-target-url').val().trim();
 			const builderType = $('#oc-builder-type').val();
@@ -245,15 +257,28 @@
 				});
 			});
 
-			if (!title) {
-				showError('Page Name Missing', 'Please enter a Page Name / Business Title before generating.');
-				$('#oc-page-title').focus();
+			if (!prompt && !targetUrl && !uploadedImageBase64) {
+				showError('Missing Input Content', 'Please provide at least one input: a business description, reference website URL, or design screenshot.');
+				$('#oc-prompt').focus();
 				return;
 			}
 
-			if (!prompt && !targetUrl && !uploadedImageBase64) {
-				showError('Missing Input Content', 'Please provide at least one input: a business description, reference website URL, or design screenshot.');
-				return;
+			// If title is empty, generate an intelligent default title from prompt or URL
+			if (!title) {
+				if (prompt) {
+					const firstSentence = prompt.split('.')[0].trim();
+					title = firstSentence.length > 50 ? firstSentence.substring(0, 47) + '...' : firstSentence;
+				} else if (targetUrl) {
+					try {
+						const domain = new URL(targetUrl.startsWith('http') ? targetUrl : 'https://' + targetUrl).hostname.replace('www.', '');
+						title = domain.charAt(0).toUpperCase() + domain.slice(1) + ' Website';
+					} catch(e) {
+						title = 'AI Generated Website';
+					}
+				} else {
+					title = 'AI Generated Website';
+				}
+				$('#oc-page-title').val(title);
 			}
 
 			if (selectedSections.length === 0) {
