@@ -1120,27 +1120,72 @@ class OmniCraft_AI_Elementor_Compiler {
 	/**
 	 * Build Interactive Showcase / Slider / Gallery Section
 	 */
+	/**
+	 * Build Interactive Showcase / Slider / Gallery Section
+	 */
 	private static function build_slider_section( $sec, $primary, $secondary, $accent, $bg_light ) {
-		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Featured Work & Showcase';
-		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Explore our high-impact digital solutions and client success stories.';
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Connected Enterprise Solutions Showcase';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Explore our specialized technological suites designed to eliminate silos and unify organizational workflows.';
 		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
 
 		$default_slides = array(
-			array( 'url' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80', 'id' => 1 ),
-			array( 'url' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80', 'id' => 2 ),
-			array( 'url' => 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80', 'id' => 3 ),
-			array( 'url' => 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&auto=format&fit=crop&q=80', 'id' => 4 ),
+			array( 'title' => 'Legal Operations Platform', 'description' => 'End-to-end matter lifecycle management, e-Billing, and spend analytics.', 'tag' => 'Legal Ops', 'image_url' => 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80' ),
+			array( 'title' => 'GRC & Risk Automation', 'description' => 'Continuous audit readiness, policy compliance, and automated vendor risk scoring.', 'tag' => 'GRC Suite', 'image_url' => 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80' ),
+			array( 'title' => 'HR Talent Compliance', 'description' => 'Automated background screening, workforce onboarding, and regulatory compliance.', 'tag' => 'HR Tech', 'image_url' => 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&auto=format&fit=crop&q=80' ),
+			array( 'title' => 'AI Automation & Analytics', 'description' => 'Intelligent contract review, workflow automation, and predictive business intelligence.', 'tag' => 'AI Engine', 'image_url' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80' ),
 		);
 
-		$carousel_images = array();
-		if ( ! empty( $items ) ) {
-			foreach ( $items as $i => $item ) {
-				$img_url = ! empty( $item['image_url'] ) ? $item['image_url'] : $default_slides[ $i % count( $default_slides ) ]['url'];
-				$carousel_images[] = array( 'url' => $img_url, 'id' => $i + 1 );
-			}
-		} else {
-			$carousel_images = $default_slides;
+		$slides = ! empty( $items ) ? $items : $default_slides;
+		$slider_id = 'oc-slider-' . self::generate_id();
+
+		$cards_html = '';
+		foreach ( $slides as $i => $slide ) {
+			$s_title = ! empty( $slide['title'] ) ? $slide['title'] : 'Enterprise Solution';
+			$s_desc  = ! empty( $slide['description'] ) ? $slide['description'] : 'Advanced automated workflow architecture designed for enterprise scalability.';
+			$s_tag   = ! empty( $slide['tag'] ) ? $slide['tag'] : 'Solution';
+			$s_img   = ! empty( $slide['image_url'] ) ? $slide['image_url'] : $default_slides[ $i % count( $default_slides ) ]['image_url'];
+
+			$cards_html .= '
+			<div class="oc-slide-item" style="flex:0 0 340px; scroll-snap-align:start; background:#ffffff; border:1px solid #e2e8f0; border-radius:18px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.04); display:flex; flex-direction:column; transition:transform 0.3s ease;">
+				<div style="height:200px; position:relative; overflow:hidden;">
+					<img src="' . esc_url( $s_img ) . '" alt="' . esc_attr( $s_title ) . '" style="width:100%; height:100%; object-fit:cover; display:block;">
+					<span style="position:absolute; top:12px; left:12px; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); color:#ffffff; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; padding:4px 10px; border-radius:6px;">
+						' . esc_html( $s_tag ) . '
+					</span>
+				</div>
+				<div style="padding:24px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
+					<div>
+						<h3 style="font-size:18px; font-weight:750; color:' . esc_attr( $secondary ) . '; margin:0 0 8px 0; line-height:1.3;">
+							' . esc_html( $s_title ) . '
+						</h3>
+						<p style="font-size:14px; color:#64748b; line-height:1.6; margin:0 0 18px 0;">
+							' . esc_html( $s_desc ) . '
+						</p>
+					</div>
+					<div>
+						<a href="#contact" style="color:' . esc_attr( $primary ) . '; font-size:13.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+							Explore Solution <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
+						</a>
+					</div>
+				</div>
+			</div>';
 		}
+
+		$slider_html = '
+		<div style="position:relative; width:100%; margin-top:35px;">
+			<div id="' . esc_attr( $slider_id ) . '" style="display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding:10px 4px 20px 4px;">
+				' . $cards_html . '
+			</div>
+			
+			<div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-top:20px;">
+				<button type="button" onclick="document.getElementById(\'' . esc_attr( $slider_id ) . '\').scrollBy({left:-364, behavior:\'smooth\'})" style="width:44px; height:44px; border-radius:50%; background:#ffffff; border:1px solid #cbd5e1; color:' . esc_attr( $secondary ) . '; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.06); font-size:16px; transition:all 0.2s;" aria-label="Previous Slide">
+					<i class="fa-solid fa-chevron-left"></i>
+				</button>
+				<button type="button" onclick="document.getElementById(\'' . esc_attr( $slider_id ) . '\').scrollBy({left:364, behavior:\'smooth\'})" style="width:44px; height:44px; border-radius:50%; background:' . esc_attr( $primary ) . '; border:none; color:#ffffff; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(0,0,0,0.15); font-size:16px; transition:all 0.2s;" aria-label="Next Slide">
+					<i class="fa-solid fa-chevron-right"></i>
+				</button>
+			</div>
+		</div>';
 
 		return array(
 			'id'       => self::generate_id(),
@@ -1159,7 +1204,6 @@ class OmniCraft_AI_Elementor_Compiler {
 					'elType'   => 'column',
 					'settings' => array( '_column_size' => 100 ),
 					'elements' => array(
-						// Header Title
 						array(
 							'id'         => self::generate_id(),
 							'elType'     => 'widget',
@@ -1173,32 +1217,12 @@ class OmniCraft_AI_Elementor_Compiler {
 								'typography_font_weight' => '800',
 							),
 						),
-						// Subtitle
 						array(
 							'id'         => self::generate_id(),
 							'elType'     => 'widget',
 							'widgetType' => 'text-editor',
 							'settings'   => array(
-								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 40px auto;">' . esc_html( $subtitle ) . '</p>',
-							),
-						),
-						// Interactive Image Carousel Slider
-						array(
-							'id'         => self::generate_id(),
-							'elType'     => 'widget',
-							'widgetType' => 'image-carousel',
-							'settings'   => array(
-								'carousel'         => $carousel_images,
-								'slides_to_show'   => '3',
-								'slides_to_scroll' => '1',
-								'autoplay'         => 'yes',
-								'autoplay_speed'   => 3000,
-								'pause_on_hover'   => 'yes',
-								'infinite'         => 'yes',
-								'effect'           => 'slide',
-								'speed'            => 500,
-								'navigation'       => 'both',
-								'thumbnail_size'   => 'full',
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 0 auto;">' . esc_html( $subtitle ) . '</p>' . $slider_html,
 							),
 						),
 					),
