@@ -147,93 +147,72 @@ class OmniCraft_AI_Elementor_Compiler {
 	/**
 	 * Build Hero Section
 	 */
+	/**
+	 * Build Hero Section
+	 */
 	private static function build_hero_section( $sec, $primary, $secondary, $accent, $text_dark ) {
-		$title       = ! empty( $sec['title'] ) ? $sec['title'] : 'Build Something Amazing Today';
-		$subtitle    = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'The next-generation platform for visionary teams and high-growth businesses.';
-		$cta_text    = ! empty( $sec['cta_text'] ) ? $sec['cta_text'] : 'Get Started Now';
+		$title       = ! empty( $sec['title'] ) ? $sec['title'] : 'Empower Decisions. Elevate Outcomes.';
+		$subtitle    = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Award-winning and AI-powered enterprise software that unifies your teams and accelerates business performance.';
+		$cta_text    = ! empty( $sec['cta_text'] ) ? $sec['cta_text'] : 'Request an Executive Demo';
 		$cta_url     = ! empty( $sec['cta_url'] ) ? $sec['cta_url'] : '#contact';
-		$image_url   = ! empty( $sec['image_url'] ) ? $sec['image_url'] : 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&auto=format&fit=crop&q=80';
-		$badge       = ! empty( $sec['badge'] ) ? $sec['badge'] : '🚀 Introducing OmniCraft AI';
+		$image_url   = ! empty( $sec['image_url'] ) ? $sec['image_url'] : 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80';
+		$badge       = ! empty( $sec['badge'] ) ? $sec['badge'] : '✦ Enterprise AI & Workflow Platform';
 
-		$left_widgets = array(
-			// Badge
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'heading',
-				'settings'   => array(
-					'title'      => '<span style="display:inline-block; padding: 6px 16px; background: rgba(99,102,241,0.12); color: ' . esc_attr( $primary ) . '; border-radius: 999px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">' . esc_html( $badge ) . '</span>',
-					'header_size'=> 'span',
-				),
-			),
-			// Main Title
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'heading',
-				'settings'   => array(
-					'title'          => esc_html( $title ),
-					'header_size'    => 'h1',
-					'title_color'    => $secondary,
-					'typography_typography' => 'custom',
-					'typography_font_size'  => array( 'unit' => 'px', 'size' => 48 ),
-					'typography_line_height'=> array( 'unit' => 'em', 'size' => 1.15 ),
-					'typography_font_weight'=> '800',
-				),
-			),
-			// Subtitle
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'text-editor',
-				'settings'   => array(
-					'editor'     => '<p style="font-size: 18px; line-height: 1.6; color: #64748b; margin-top: 10px;">' . esc_html( $subtitle ) . '</p>',
-				),
-			),
-			// CTA Button
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'button',
-				'settings'   => array(
-					'text'            => esc_html( $cta_text ),
-					'link'            => array( 'url' => esc_url_raw( $cta_url ) ),
-					'size'            => 'lg',
-					'button_text_color'=> '#ffffff',
-					'background_color'=> $primary,
-					'border_radius'   => array( 'unit' => 'px', 'top' => 8, 'right' => 8, 'bottom' => 8, 'left' => 8 ),
-					'typography_font_weight' => '600',
-					'hover_animation' => 'grow',
-				),
-			),
-		);
+		$left_content_html = '
+		<div style="display:flex; flex-direction:column; gap:20px;">
+			<div>
+				<span style="display:inline-flex; align-items:center; gap:8px; padding:6px 16px; background:rgba(99,102,241,0.08); color:' . esc_attr( $primary ) . '; border:1px solid ' . esc_attr( $primary ) . '30; border-radius:999px; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+					<span style="width:7px; height:7px; border-radius:50%; background:' . esc_attr( $primary ) . '; display:inline-block; box-shadow:0 0 8px ' . esc_attr( $primary ) . ';"></span>
+					' . esc_html( $badge ) . '
+				</span>
+			</div>
+			<h1 style="font-size:46px; font-weight:850; line-height:1.15; letter-spacing:-0.03em; color:' . esc_attr( $secondary ) . '; margin:0;">
+				' . esc_html( $title ) . '
+			</h1>
+			<p style="font-size:18px; line-height:1.65; color:#475569; margin:0;">
+				' . esc_html( $subtitle ) . '
+			</p>
+			<div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:8px;">
+				<a href="' . esc_url( $cta_url ) . '" style="background:' . esc_attr( $primary ) . '; color:#ffffff; padding:15px 32px; border-radius:10px; font-weight:700; font-size:15px; text-decoration:none; box-shadow:0 10px 25px rgba(0,0,0,0.12); display:inline-flex; align-items:center; gap:8px; transition:transform 0.2s;">
+					' . esc_html( $cta_text ) . ' <i class="fa-solid fa-arrow-right"></i>
+				</a>
+				<a href="#solutions" style="background:#ffffff; color:#0f172a; border:1px solid #cbd5e1; padding:14px 26px; border-radius:10px; font-weight:600; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+					<i class="fa-solid fa-circle-play" style="color:' . esc_attr( $primary ) . ';"></i> Explore Solutions
+				</a>
+			</div>
+			<div style="display:flex; align-items:center; gap:20px; margin-top:16px; font-size:13px; color:#64748b; font-weight:600; flex-wrap:wrap;">
+				<span><i class="fa-solid fa-circle-check" style="color:#10b981; margin-right:5px;"></i> Enterprise Security</span>
+				<span><i class="fa-solid fa-circle-check" style="color:#10b981; margin-right:5px;"></i> 99.99% Uptime SLA</span>
+				<span><i class="fa-solid fa-circle-check" style="color:#10b981; margin-right:5px;"></i> 10,000+ Global Clients</span>
+			</div>
+		</div>';
 
-		$right_widgets = array(
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'image',
-				'settings'   => array(
-					'image'         => array(
-						'url' => esc_url_raw( $image_url ),
-						'id'  => '',
-					),
-					'image_size'    => 'full',
-					'border_radius' => array( 'unit' => 'px', 'top' => 16, 'right' => 16, 'bottom' => 16, 'left' => 16 ),
-					'box_shadow_box_shadow_type' => 'yes',
-					'box_shadow_box_shadow'      => array( 'horizontal' => 0, 'vertical' => 20, 'blur' => 40, 'spread' => -10, 'color' => 'rgba(0,0,0,0.15)' ),
-					'_animation'    => 'fadeInRight',
-					'_animation_delay' => 200,
-				),
-			),
-		);
+		$right_visual_html = '
+		<div style="position:relative; border-radius:20px; padding:10px; background:linear-gradient(135deg, rgba(255,255,255,0.9), rgba(241,245,249,0.7)); border:1px solid #e2e8f0; box-shadow:0 25px 50px -12px rgba(0,0,0,0.15);">
+			<div style="height:32px; background:#f8fafc; border-radius:12px 12px 0 0; display:flex; align-items:center; gap:6px; padding:0 12px; border-bottom:1px solid #e2e8f0;">
+				<span style="width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+				<span style="width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
+				<span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+				<span style="margin-left:auto; font-size:11px; color:#94a3b8; font-family:monospace;">app.enterprise.io/dashboard</span>
+			</div>
+			<div style="overflow:hidden; border-radius:0 0 12px 12px; height:360px; position:relative;">
+				<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( $title ) . '" style="width:100%; height:100%; object-fit:cover; display:block;">
+				<div style="position:absolute; bottom:16px; left:16px; background:rgba(15,23,42,0.88); backdrop-filter:blur(8px); padding:12px 18px; border-radius:12px; color:#fff; border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; gap:12px;">
+					<div style="width:36px; height:36px; border-radius:8px; background:' . esc_attr( $primary ) . '; display:flex; align-items:center; justify-content:center; font-size:16px;"><i class="fa-solid fa-bolt"></i></div>
+					<div>
+						<strong style="display:block; font-size:13px;">AI Orchestration Engine</strong>
+						<span style="font-size:11px; color:#94a3b8;">99.9% Real-Time Compliance Sync</span>
+					</div>
+				</div>
+			</div>
+		</div>';
 
 		return array(
 			'id'       => self::generate_id(),
 			'elType'   => 'section',
 			'settings' => array(
-				'layout'          => 'boxed',
-				'padding'         => array( 'unit' => 'px', 'top' => 90, 'right' => 20, 'bottom' => 90, 'left' => 20, 'isLinked' => false ),
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 90, 'right' => 20, 'bottom' => 90, 'left' => 20, 'isLinked' => false ),
 				'background_background' => 'classic',
 				'background_color'      => '#ffffff',
 				'_css_id'               => 'hero',
@@ -244,109 +223,87 @@ class OmniCraft_AI_Elementor_Compiler {
 					'id'       => self::generate_id(),
 					'elType'   => 'column',
 					'settings' => array(
-						'_column_size'   => 50,
+						'_column_size'   => 52,
 						'vertical_align' => 'middle',
-						'padding'        => array( 'unit' => 'px', 'top' => 10, 'right' => 30, 'bottom' => 10, 'left' => 10, 'isLinked' => false ),
-						'_animation'     => 'fadeInLeft',
+						'padding'        => array( 'unit' => 'px', 'top' => 10, 'right' => 25, 'bottom' => 10, 'left' => 0, 'isLinked' => false ),
 					),
-					'elements' => $left_widgets,
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array( 'editor' => $left_content_html ),
+						),
+					),
 				),
 				array(
 					'id'       => self::generate_id(),
 					'elType'   => 'column',
 					'settings' => array(
-						'_column_size'   => 50,
+						'_column_size'   => 48,
 						'vertical_align' => 'middle',
-						'padding'        => array( 'unit' => 'px', 'top' => 10, 'right' => 10, 'bottom' => 10, 'left' => 30, 'isLinked' => false ),
+						'padding'        => array( 'unit' => 'px', 'top' => 10, 'right' => 0, 'bottom' => 10, 'left' => 15, 'isLinked' => false ),
 					),
-					'elements' => $right_widgets,
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array( 'editor' => $right_visual_html ),
+						),
+					),
 				),
 			),
 		);
 	}
 
 	/**
-	 * Build Features Grid Section
+	 * Build Features / Solutions Bento Grid Section
 	 */
 	private static function build_features_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
-		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Powerful Features Designed for Scale';
-		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Everything you need to grow and succeed, unified in one clean experience.';
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Enterprise Solutions & Capabilities';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Unified software architecture designed to eliminate operational friction and accelerate growth.';
 		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
 
 		if ( empty( $items ) ) {
 			$items = array(
-				array( 'title' => 'Lightning Fast Performance', 'description' => 'Engineered for speed, stability, and unparalleled optimization.' ),
-				array( 'title' => 'Intuitive Modern Design', 'description' => 'Effortlessly intuitive interfaces crafted with precision and care.' ),
-				array( 'title' => 'Enterprise Security', 'description' => 'Bank-grade encryption, role-based protection, and 24/7 reliability.' ),
+				array( 'title' => 'Legal Operations & Governance', 'description' => 'Unify matter management, e-Billing, and spend analytics with automated compliance tracking.' ),
+				array( 'title' => 'Risk & Compliance Automation', 'description' => 'Continuous audit readiness, policy lifecycle management, and third-party risk mitigation.' ),
+				array( 'title' => 'Human Resources & Talent Compliance', 'description' => 'Automated background screening, I-9 verification, and global workforce onboarding.' ),
+				array( 'title' => 'Workflow & AI Orchestration', 'description' => 'Connect 50+ enterprise systems with zero-code automation triggers and real-time alerts.' ),
 			);
 		}
 
-		// Top Heading Section
-		$header_widgets = array(
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'heading',
-				'settings'   => array(
-					'title'          => esc_html( $title ),
-					'header_size'    => 'h2',
-					'align'          => 'center',
-					'title_color'    => $secondary,
-					'typography_typography' => 'custom',
-					'typography_font_size'  => array( 'unit' => 'px', 'size' => 36 ),
-					'typography_font_weight'=> '700',
-				),
-			),
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'text-editor',
-				'settings'   => array(
-					'editor' => '<p style="text-align: center; max-width: 680px; margin: 0 auto 40px auto; color: #64748b; font-size: 17px;">' . esc_html( $subtitle ) . '</p>',
-				),
-			),
-		);
+		$icons = array( 'fa-scale-balanced', 'fa-shield-halved', 'fa-users-gear', 'fa-diagram-project', 'fa-brain', 'fa-cubes' );
 
-		// Build columns for features (up to 3 columns per row)
-		$columns = array();
-		$col_count = count( $items );
-		$col_size = $col_count >= 3 ? 33.33 : ( $col_count === 2 ? 50 : 100 );
+		// Build Bento Grid HTML
+		$bento_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; margin-top:40px;">';
+		foreach ( $items as $i => $item ) {
+			$f_title = ! empty( $item['title'] ) ? $item['title'] : 'Core Capability';
+			$f_desc  = ! empty( $item['description'] ) ? $item['description'] : 'Comprehensive enterprise capability designed for mission-critical operations.';
+			$icon    = $icons[ $i % count( $icons ) ];
 
-		foreach ( array_slice( $items, 0, 3 ) as $item ) {
-			$f_title = ! empty( $item['title'] ) ? $item['title'] : 'Feature Benefit';
-			$f_desc  = ! empty( $item['description'] ) ? $item['description'] : 'Comprehensive description of the feature benefit.';
-
-			$columns[] = array(
-				'id'       => self::generate_id(),
-				'elType'   => 'column',
-				'settings' => array(
-					'_column_size' => $col_size,
-					'padding'      => array( 'unit' => 'px', 'top' => 32, 'right' => 28, 'bottom' => 32, 'left' => 28, 'isLinked' => false ),
-					'background_background' => 'classic',
-					'background_color'      => '#ffffff',
-					'border_radius'         => array( 'unit' => 'px', 'top' => 12, 'right' => 12, 'bottom' => 12, 'left' => 12 ),
-					'box_shadow_box_shadow_type' => 'yes',
-					'box_shadow_box_shadow' => array( 'horizontal' => 0, 'vertical' => 8, 'blur' => 20, 'spread' => -4, 'color' => 'rgba(0,0,0,0.06)' ),
-				),
-				'elements' => array(
-					array(
-						'id'         => self::generate_id(),
-						'elType'     => 'widget',
-						'widgetType' => 'icon-box',
-						'settings'   => array(
-							'title_text'        => esc_html( $f_title ),
-							'description_text'  => esc_html( $f_desc ),
-							'selected_icon'     => array( 'value' => 'fas fa-check-circle', 'library' => 'fa-solid' ),
-							'primary_color'     => $primary,
-							'title_color'       => $secondary,
-							'description_color' => '#64748b',
-							'position'          => 'top',
-							'title_size'        => 'h4',
-						),
-					),
-				),
-			);
+			$bento_html .= '
+			<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:18px; padding:32px; box-shadow:0 10px 25px rgba(0,0,0,0.04); display:flex; flex-direction:column; justify-content:space-between; transition:all 0.3s ease;">
+				<div>
+					<div style="width:48px; height:48px; border-radius:12px; background:' . esc_attr( $primary ) . '15; color:' . esc_attr( $primary ) . '; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:20px;">
+						<i class="fa-solid ' . esc_attr( $icon ) . '"></i>
+					</div>
+					<h3 style="font-size:20px; font-weight:750; color:' . esc_attr( $secondary ) . '; margin:0 0 10px 0; line-height:1.3;">
+						' . esc_html( $f_title ) . '
+					</h3>
+					<p style="font-size:14.5px; color:#64748b; line-height:1.6; margin:0 0 20px 0;">
+						' . esc_html( $f_desc ) . '
+					</p>
+				</div>
+				<div>
+					<span style="color:' . esc_attr( $primary ) . '; font-size:13.5px; font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+						Explore Solution <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
+					</span>
+				</div>
+			</div>';
 		}
+		$bento_html .= '</div>';
 
 		return array(
 			'id'       => self::generate_id(),
@@ -355,95 +312,78 @@ class OmniCraft_AI_Elementor_Compiler {
 				'layout'                => 'boxed',
 				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
 				'background_background' => 'classic',
-				'background_color'      => $bg_light,
+				'background_color'      => '#f8fafc',
+				'_css_id'               => 'features',
+				'_animation'            => 'fadeInUp',
 			),
 			'elements' => array(
 				array(
 					'id'       => self::generate_id(),
 					'elType'   => 'column',
 					'settings' => array( '_column_size' => 100 ),
-					'elements' => $header_widgets,
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:680px; margin:12px auto 0 auto;">' . esc_html( $subtitle ) . '</p>' . $bento_html,
+							),
+						),
+					),
 				),
 			),
-			'inner_sections' => array(), // Nested elements in standard Elementor format are handled as sequential columns or inner sections
 		);
 	}
 
 	/**
-	 * Build Testimonials Section
+	 * Build Alternating Deep-Dive Service Rows Section (About / Solutions Deep Dive)
 	 */
-	private static function build_testimonials_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
-		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Trusted by Leading Brands';
-		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Discover why top industry leaders choose our platform.';
-		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+	private static function build_about_section( $sec, $primary, $secondary, $text_dark ) {
+		$title     = ! empty( $sec['title'] ) ? $sec['title'] : 'At Mitratech, We Turn Innovation Into Tangible Results';
+		$content   = ! empty( $sec['content'] ) ? $sec['content'] : 'Our award-winning compliance and legal operations software unites your enterprise teams, eliminates operational blind spots, and delivers measurable ROI.';
+		$image_url = ! empty( $sec['image_url'] ) ? $sec['image_url'] : 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1000&auto=format&fit=crop&q=80';
 
-		if ( empty( $items ) ) {
-			$items = array(
-				array( 'quote' => 'This solution revolutionized our workflow within 24 hours. Truly game-changing.', 'author' => 'Sarah Jenkins', 'role' => 'VP of Product' ),
-				array( 'quote' => 'Outstanding speed, clean design, and reliable performance. Highly recommended.', 'author' => 'Michael Chang', 'role' => 'Founder & CEO' ),
-				array( 'quote' => 'The return on investment was immediate. Our conversions increased by 40%.', 'author' => 'Elena Rostova', 'role' => 'Marketing Director' ),
-			);
-		}
+		$deep_dive_html = '
+		<div style="display:flex; flex-direction:column; gap:20px;">
+			<span style="display:inline-block; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:' . esc_attr( $primary ) . ';">THE ARCHITECTURAL ADVANTAGE</span>
+			<h2 style="font-size:36px; font-weight:800; line-height:1.2; color:' . esc_attr( $secondary ) . '; margin:0;">' . esc_html( $title ) . '</h2>
+			<p style="font-size:16.5px; line-height:1.7; color:#475569; margin:0;">' . esc_html( $content ) . '</p>
+			
+			<div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+				<div style="display:flex; align-items:center; gap:10px;">
+					<i class="fa-solid fa-circle-check" style="color:' . esc_attr( $primary ) . '; font-size:18px;"></i>
+					<span style="color:#1e293b; font-weight:600; font-size:15px;">Unified GRC, Legal & HR Compliance Data Lake</span>
+				</div>
+				<div style="display:flex; align-items:center; gap:10px;">
+					<i class="fa-solid fa-circle-check" style="color:' . esc_attr( $primary ) . '; font-size:18px;"></i>
+					<span style="color:#1e293b; font-weight:600; font-size:15px;">Automated Risk Scoring & Continuous Audit Trails</span>
+				</div>
+				<div style="display:flex; align-items:center; gap:10px;">
+					<i class="fa-solid fa-circle-check" style="color:' . esc_attr( $primary ) . '; font-size:18px;"></i>
+					<span style="color:#1e293b; font-weight:600; font-size:15px;">SOC2 Type II, ISO27001 & GDPR Compliant Infrastructure</span>
+				</div>
+			</div>
 
-		$header_widgets = array(
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'heading',
-				'settings'   => array(
-					'title'       => esc_html( $title ),
-					'header_size' => 'h2',
-					'align'       => 'center',
-					'title_color' => $secondary,
-					'typography_font_size' => array( 'unit' => 'px', 'size' => 36 ),
-					'typography_font_weight' => '700',
-				),
-			),
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'text-editor',
-				'settings'   => array(
-					'editor' => '<p style="text-align: center; color: #64748b; font-size: 17px; margin-bottom: 40px;">' . esc_html( $subtitle ) . '</p>',
-				),
-			),
-		);
-
-		$columns = array();
-		foreach ( array_slice( $items, 0, 3 ) as $item ) {
-			$quote  = ! empty( $item['quote'] ) ? $item['quote'] : 'Incredible product and experience!';
-			$author = ! empty( $item['author'] ) ? $item['author'] : 'Satisfied Customer';
-			$role   = ! empty( $item['role'] ) ? $item['role'] : 'Executive';
-
-			$columns[] = array(
-				'id'       => self::generate_id(),
-				'elType'   => 'column',
-				'settings' => array(
-					'_column_size' => 33.33,
-					'padding'      => array( 'unit' => 'px', 'top' => 28, 'right' => 24, 'bottom' => 28, 'left' => 24, 'isLinked' => false ),
-					'background_background' => 'classic',
-					'background_color'      => '#ffffff',
-					'border_radius'         => array( 'unit' => 'px', 'top' => 12, 'right' => 12, 'bottom' => 12, 'left' => 12 ),
-					'box_shadow_box_shadow_type' => 'yes',
-					'box_shadow_box_shadow' => array( 'horizontal' => 0, 'vertical' => 4, 'blur' => 16, 'spread' => -2, 'color' => 'rgba(0,0,0,0.05)' ),
-				),
-				'elements' => array(
-					array(
-						'id'         => self::generate_id(),
-						'elType'     => 'widget',
-						'widgetType' => 'testimonial',
-						'settings'   => array(
-							'testimonial_content' => esc_html( $quote ),
-							'testimonial_name'    => esc_html( $author ),
-							'testimonial_job'     => esc_html( $role ),
-							'testimonial_text_color' => '#334155',
-							'testimonial_name_color' => $secondary,
-							'testimonial_job_color'  => $primary,
-						),
-					),
-				),
-			);
-		}
+			<div style="margin-top:16px;">
+				<a href="#contact" style="background:' . esc_attr( $primary ) . '; color:#fff; padding:14px 28px; border-radius:8px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+					Discover The Platform <i class="fa-solid fa-arrow-right"></i>
+				</a>
+			</div>
+		</div>';
 
 		return array(
 			'id'       => self::generate_id(),
@@ -453,57 +393,162 @@ class OmniCraft_AI_Elementor_Compiler {
 				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
 				'background_background' => 'classic',
 				'background_color'      => '#ffffff',
+				'_css_id'               => 'about',
+				'_animation'            => 'fadeInUp',
 			),
 			'elements' => array(
 				array(
 					'id'       => self::generate_id(),
 					'elType'   => 'column',
-					'settings' => array( '_column_size' => 100 ),
-					'elements' => $header_widgets,
+					'settings' => array(
+						'_column_size'   => 50,
+						'vertical_align' => 'middle',
+						'padding'        => array( 'unit' => 'px', 'top' => 10, 'right' => 30, 'bottom' => 10, 'left' => 10, 'isLinked' => false ),
+					),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'image',
+							'settings'   => array(
+								'image'         => array( 'url' => esc_url_raw( $image_url ) ),
+								'image_size'    => 'full',
+								'border_radius' => array( 'unit' => 'px', 'top' => 16, 'right' => 16, 'bottom' => 16, 'left' => 16 ),
+								'box_shadow_box_shadow_type' => 'yes',
+								'box_shadow_box_shadow' => array( 'horizontal' => 0, 'vertical' => 15, 'blur' => 35, 'spread' => -5, 'color' => 'rgba(0,0,0,0.1)' ),
+							),
+						),
+					),
+				),
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array(
+						'_column_size'   => 50,
+						'vertical_align' => 'middle',
+						'padding'        => array( 'unit' => 'px', 'top' => 10, 'right' => 10, 'bottom' => 10, 'left' => 30, 'isLinked' => false ),
+					),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array( 'editor' => $deep_dive_html ),
+						),
+					),
 				),
 			),
 		);
 	}
 
 	/**
-	 * Build Pricing Section
+	 * Build High-Impact Metrics & Stats Section
 	 */
-	private static function build_pricing_section( $sec, $primary, $secondary, $accent, $bg_light, $text_dark ) {
-		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Simple, Transparent Pricing';
-		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Choose the plan that fits your ambition. Upgrade or cancel anytime.';
-		$plans    = ! empty( $sec['plans'] ) && is_array( $sec['plans'] ) ? $sec['plans'] : array();
-
-		if ( empty( $plans ) ) {
-			$plans = array(
-				array( 'name' => 'Starter', 'price' => '$29/mo', 'features' => array( 'Up to 5 Projects', 'Standard Analytics', 'Community Support' ), 'is_featured' => false ),
-				array( 'name' => 'Professional', 'price' => '$79/mo', 'features' => array( 'Unlimited Projects', 'Advanced AI Engine', 'Priority 24/7 Support', 'Custom Branding' ), 'is_featured' => true ),
-				array( 'name' => 'Enterprise', 'price' => '$199/mo', 'features' => array( 'Dedicated Infrastructure', 'Custom SLA', 'White-label APIs', 'Dedicated Account Manager' ), 'is_featured' => false ),
+	private static function build_stats_section( $sec, $primary, $secondary, $bg_light ) {
+		$items = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+		if ( empty( $items ) ) {
+			$items = array(
+				array( 'number' => '90', 'suffix' => '%', 'title' => 'GRC Efficiency Boost' ),
+				array( 'number' => '500', 'suffix' => 'k+', 'title' => 'Active Enterprise Users' ),
+				array( 'number' => '99.9', 'suffix' => '%', 'title' => 'Audit Accuracy & SLA' ),
+				array( 'number' => '10', 'suffix' => 'x', 'title' => 'Faster ROI Delivery' ),
 			);
 		}
 
-		$header_widgets = array(
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'heading',
-				'settings'   => array(
-					'title'       => esc_html( $title ),
-					'header_size' => 'h2',
-					'align'       => 'center',
-					'title_color' => $secondary,
-					'typography_font_size' => array( 'unit' => 'px', 'size' => 36 ),
-					'typography_font_weight' => '700',
-				),
+		$stats_cards_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px; text-align:center;">';
+		foreach ( $items as $item ) {
+			$num    = ! empty( $item['number'] ) ? $item['number'] : '100';
+			$suffix = ! empty( $item['suffix'] ) ? $item['suffix'] : '+';
+			$st_title = ! empty( $item['title'] ) ? $item['title'] : 'Key Performance Metric';
+
+			$stats_cards_html .= '
+			<div style="background:rgba(255,255,255,0.06); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:28px 20px;">
+				<div style="font-size:44px; font-weight:900; line-height:1; color:#ffffff; margin-bottom:8px; letter-spacing:-0.02em;">
+					' . esc_html( $num ) . '<span style="color:' . esc_attr( $primary ) . ';">' . esc_html( $suffix ) . '</span>
+				</div>
+				<div style="font-size:14px; font-weight:600; color:#94a3b8; line-height:1.4;">
+					' . esc_html( $st_title ) . '
+				</div>
+			</div>';
+		}
+		$stats_cards_html .= '</div>';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 60, 'right' => 20, 'bottom' => 60, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => ! empty( $secondary ) ? $secondary : '#0f172a',
+				'_css_id'               => 'stats',
+				'_animation'            => 'fadeInUp',
 			),
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'text-editor',
-				'settings'   => array(
-					'editor' => '<p style="text-align: center; color: #64748b; font-size: 17px; margin-bottom: 40px;">' . esc_html( $subtitle ) . '</p>',
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array( 'editor' => $stats_cards_html ),
+						),
+					),
 				),
 			),
 		);
+	}
+
+	/**
+	 * Build Star-Rated Executive Testimonials Section
+	 */
+	private static function build_testimonials_section( $sec, $primary, $secondary, $bg_light, $text_dark ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Trusted by Visionary Industry Leaders';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Real feedback from Fortune 500 executives, general counsels, and compliance directors.';
+		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
+
+		if ( empty( $items ) ) {
+			$items = array(
+				array( 'quote' => 'Mitratech completely transformed our legal operations and GRC visibility across 40 global subsidiaries in under 6 months.', 'author' => 'Sarah Jenkins', 'role' => 'Chief Legal Officer at Apex Global' ),
+				array( 'quote' => 'The return on investment was immediate. Our compliance audit preparation time dropped from 3 weeks to 2 hours.', 'author' => 'Marcus Vance', 'role' => 'VP of Risk & Governance at CloudScale' ),
+				array( 'quote' => 'Unmatched speed, reliability, and precision engineering. It is the gold standard for enterprise compliance.', 'author' => 'Dr. Elena Rostova', 'role' => 'Director of Corporate Compliance at Veloce' ),
+			);
+		}
+
+		$avatars = array(
+			'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80',
+			'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80',
+			'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80',
+		);
+
+		$reviews_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-top:40px;">';
+		foreach ( $items as $i => $item ) {
+			$quote  = ! empty( $item['quote'] ) ? $item['quote'] : 'Incredible product and experience!';
+			$author = ! empty( $item['author'] ) ? $item['author'] : 'Enterprise Leader';
+			$role   = ! empty( $item['role'] ) ? $item['role'] : 'Executive';
+			$avatar = $avatars[ $i % count( $avatars ) ];
+
+			$reviews_html .= '
+			<div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:18px; padding:32px; box-shadow:0 10px 25px rgba(0,0,0,0.04); display:flex; flex-direction:column; justify-content:space-between;">
+				<div>
+					<div style="color:#f59e0b; font-size:16px; margin-bottom:14px; letter-spacing:2px;">★★★★★</div>
+					<p style="font-size:15px; line-height:1.65; color:#334155; font-style:italic; margin:0 0 24px 0;">
+						“' . esc_html( $quote ) . '”
+					</p>
+				</div>
+				<div style="display:flex; align-items:center; gap:14px; border-top:1px solid #f1f5f9; padding-top:16px;">
+					<img src="' . esc_url( $avatar ) . '" alt="' . esc_attr( $author ) . '" style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:2px solid ' . esc_attr( $primary ) . ';">
+					<div>
+						<strong style="color:#0f172a; font-size:15px; display:block;">' . esc_html( $author ) . '</strong>
+						<span style="color:#64748b; font-size:13px;">' . esc_html( $role ) . '</span>
+					</div>
+				</div>
+			</div>';
+		}
+		$reviews_html .= '</div>';
 
 		return array(
 			'id'       => self::generate_id(),
@@ -512,14 +557,134 @@ class OmniCraft_AI_Elementor_Compiler {
 				'layout'                => 'boxed',
 				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
 				'background_background' => 'classic',
-				'background_color'      => $bg_light,
+				'background_color'      => '#f8fafc',
+				'_css_id'               => 'testimonials',
+				'_animation'            => 'fadeInUp',
 			),
 			'elements' => array(
 				array(
 					'id'       => self::generate_id(),
 					'elType'   => 'column',
 					'settings' => array( '_column_size' => 100 ),
-					'elements' => $header_widgets,
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 0 auto;">' . esc_html( $subtitle ) . '</p>' . $reviews_html,
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Build Transparent Pricing Section with Full Feature Checklist Cards
+	 */
+	private static function build_pricing_section( $sec, $primary, $secondary, $accent, $bg_light, $text_dark ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Transparent, Flexible Investment Plans';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Scalable deployment models tailored to mid-market and global enterprise teams.';
+		$plans    = ! empty( $sec['plans'] ) && is_array( $sec['plans'] ) ? $sec['plans'] : array();
+
+		if ( empty( $plans ) ) {
+			$plans = array(
+				array( 'name' => 'Essential Compliance', 'price' => '$499/mo', 'features' => array( 'Core Matter & Spend Management', 'Standard Compliance Audit Logs', 'Up to 25 Active Team Seats', 'REST API & Webhook Access', 'Email & Standard Support' ), 'is_featured' => false ),
+				array( 'name' => 'Enterprise Suite', 'price' => '$1,299/mo', 'features' => array( 'Full GRC & Legal Operations Suite', 'AI-Powered Contract Review Engine', 'Unlimited Global Users & Workspaces', 'Automated Third-Party Risk Audits', '24/7 Dedicated Concierge SLA' ), 'is_featured' => true ),
+				array( 'name' => 'Custom Global SLA', 'price' => 'Custom', 'features' => array( 'Dedicated On-Premise / Hybrid Cloud', 'Custom Machine Learning Models', 'Custom ERP & SAP Connectors', 'Enterprise Data Residency Guarantee', 'Executive Solution Architect Support' ), 'is_featured' => false ),
+			);
+		}
+
+		$pricing_cards_html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-top:40px; align-items:stretch;">';
+		foreach ( $plans as $plan ) {
+			$p_name     = ! empty( $plan['name'] ) ? $plan['name'] : 'Enterprise Plan';
+			$p_price    = ! empty( $plan['price'] ) ? $plan['price'] : '$99/mo';
+			$p_features = ! empty( $plan['features'] ) && is_array( $plan['features'] ) ? $plan['features'] : array( 'Enterprise Platform Access', 'Dedicated Concierge', 'API Integrations' );
+			$is_feat    = ! empty( $plan['is_featured'] );
+
+			$card_border = $is_feat ? '2px solid ' . esc_attr( $primary ) : '1px solid #e2e8f0';
+			$badge_html  = $is_feat ? '<span style="background:' . esc_attr( $primary ) . '; color:#fff; font-size:11px; font-weight:800; text-transform:uppercase; padding:4px 12px; border-radius:999px; display:inline-block; margin-bottom:12px;">★ Most Popular Choice</span>' : '<span style="font-size:11px; font-weight:800; text-transform:uppercase; color:#94a3b8; padding:4px 0; display:inline-block; margin-bottom:12px;">Standard Deployment</span>';
+			$btn_bg      = $is_feat ? 'background:' . esc_attr( $primary ) . '; color:#fff;' : 'background:#f8fafc; color:#0f172a; border:1px solid #cbd5e1;';
+
+			$features_list = '';
+			foreach ( $p_features as $feat ) {
+				$features_list .= '<li style="display:flex; align-items:center; gap:10px; font-size:14px; color:#334155; margin-bottom:10px;"><i class="fa-solid fa-check" style="color:' . esc_attr( $primary ) . '; font-size:13px;"></i> ' . esc_html( $feat ) . '</li>';
+			}
+
+			$pricing_cards_html .= '
+			<div style="background:#ffffff; border:' . $card_border . '; border-radius:20px; padding:36px 28px; box-shadow:0 15px 35px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:space-between; position:relative;">
+				<div>
+					' . $badge_html . '
+					<h3 style="font-size:22px; font-weight:800; color:#0f172a; margin:0 0 8px 0;">' . esc_html( $p_name ) . '</h3>
+					<div style="font-size:38px; font-weight:900; color:' . esc_attr( $secondary ) . '; margin:12px 0 20px 0;">' . esc_html( $p_price ) . '</div>
+					<hr style="border:none; border-top:1px solid #f1f5f9; margin:20px 0;">
+					<ul style="list-style:none; padding:0; margin:0 0 28px 0;">
+						' . $features_list . '
+					</ul>
+				</div>
+				<div>
+					<a href="#contact" style="' . $btn_bg . ' width:100%; display:block; text-align:center; padding:14px 0; border-radius:10px; font-weight:700; font-size:15px; text-decoration:none; box-sizing:border-box;">
+						Choose ' . esc_html( $p_name ) . '
+					</a>
+				</div>
+			</div>';
+		}
+		$pricing_cards_html .= '</div>';
+
+		return array(
+			'id'       => self::generate_id(),
+			'elType'   => 'section',
+			'settings' => array(
+				'layout'                => 'boxed',
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
+				'background_background' => 'classic',
+				'background_color'      => '#ffffff',
+				'_css_id'               => 'pricing',
+				'_animation'            => 'fadeInUp',
+			),
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'heading',
+							'settings'   => array(
+								'title'       => esc_html( $title ),
+								'header_size' => 'h2',
+								'align'       => 'center',
+								'title_color' => $secondary,
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array(
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 0 auto;">' . esc_html( $subtitle ) . '</p>' . $pricing_cards_html,
+							),
+						),
+					),
 				),
 			),
 		);
@@ -530,14 +695,15 @@ class OmniCraft_AI_Elementor_Compiler {
 	 */
 	private static function build_faq_section( $sec, $primary, $secondary, $text_dark ) {
 		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Frequently Asked Questions';
-		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Got questions? We have answers.';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Everything you need to know about deployment, security, and migration.';
 		$items    = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
 
 		if ( empty( $items ) ) {
 			$items = array(
-				array( 'question' => 'How quickly can I launch my site?', 'answer' => 'You can generate and publish your complete site in less than 60 seconds.' ),
-				array( 'question' => 'Can I edit the generated content in Elementor?', 'answer' => 'Yes, everything is 100% native Elementor elements that can be customized with drag-and-drop.' ),
-				array( 'question' => 'Are placeholder images included?', 'answer' => 'Yes, contextual high-resolution imagery is automatically sourced and placed.' ),
+				array( 'question' => 'How does the platform integrate with our existing ERP and legal systems?', 'answer' => 'We offer 50+ pre-built native connectors for major ERPs, SAP, Oracle, Workday, and Salesforce, with full bidirectional sync.' ),
+				array( 'question' => 'What compliance and security certifications are supported?', 'answer' => 'Our platform is certified for SOC2 Type II, ISO27001, HIPAA, and GDPR compliance, featuring bank-grade AES-256 encryption at rest and in transit.' ),
+				array( 'question' => 'Can we customize workflows without custom engineering?', 'answer' => 'Yes, our visual workflow builder allows operations leaders to configure approval chains, risk thresholds, and notification rules with zero code.' ),
+				array( 'question' => 'What is the average enterprise onboarding timeframe?', 'answer' => 'Standard enterprise deployments are live within 2 to 4 weeks, supported by our dedicated implementation engineers.' ),
 			);
 		}
 
@@ -550,41 +716,6 @@ class OmniCraft_AI_Elementor_Compiler {
 			);
 		}
 
-		$widgets = array(
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'heading',
-				'settings'   => array(
-					'title'       => esc_html( $title ),
-					'header_size' => 'h2',
-					'align'       => 'center',
-					'title_color' => $secondary,
-					'typography_font_size' => array( 'unit' => 'px', 'size' => 36 ),
-					'typography_font_weight' => '700',
-				),
-			),
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'text-editor',
-				'settings'   => array(
-					'editor' => '<p style="text-align: center; color: #64748b; font-size: 17px; margin-bottom: 30px;">' . esc_html( $subtitle ) . '</p>',
-				),
-			),
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'accordion',
-				'settings'   => array(
-					'tabs'              => $accordion_tabs,
-					'title_color'       => $secondary,
-					'tab_active_color'  => $primary,
-					'border_color'      => '#e2e8f0',
-				),
-			),
-		);
-
 		return array(
 			'id'       => self::generate_id(),
 			'elType'   => 'section',
@@ -593,6 +724,8 @@ class OmniCraft_AI_Elementor_Compiler {
 				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
 				'background_background' => 'classic',
 				'background_color'      => '#ffffff',
+				'_css_id'               => 'faq',
+				'_animation'            => 'fadeInUp',
 			),
 			'elements' => array(
 				array(
@@ -600,121 +733,8 @@ class OmniCraft_AI_Elementor_Compiler {
 					'elType'   => 'column',
 					'settings' => array(
 						'_column_size' => 100,
-						'padding'      => array( 'unit' => 'px', 'top' => 0, 'right' => 80, 'bottom' => 0, 'left' => 80, 'isLinked' => false ),
+						'padding'      => array( 'unit' => 'px', 'top' => 0, 'right' => 60, 'bottom' => 0, 'left' => 60, 'isLinked' => false ),
 					),
-					'elements' => $widgets,
-				),
-			),
-		);
-	}
-
-	/**
-	 * Build Call to Action (CTA) Section
-	 */
-	private static function build_cta_section( $sec, $primary, $secondary, $accent ) {
-		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Ready to Transform Your Online Presence?';
-		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Join thousands of satisfied founders and scale your vision effortlessly today.';
-		$cta_text = ! empty( $sec['cta_text'] ) ? $sec['cta_text'] : 'Get Started for Free';
-		$cta_url  = ! empty( $sec['cta_url'] ) ? $sec['cta_url'] : '#contact';
-
-		$widgets = array(
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'heading',
-				'settings'   => array(
-					'title'       => esc_html( $title ),
-					'header_size' => 'h2',
-					'align'       => 'center',
-					'title_color' => '#ffffff',
-					'typography_font_size'   => array( 'unit' => 'px', 'size' => 40 ),
-					'typography_font_weight' => '800',
-				),
-			),
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'text-editor',
-				'settings'   => array(
-					'editor' => '<p style="text-align: center; color: #e2e8f0; font-size: 19px; max-width: 600px; margin: 0 auto 30px auto;">' . esc_html( $subtitle ) . '</p>',
-				),
-			),
-			array(
-				'id'         => self::generate_id(),
-				'elType'     => 'widget',
-				'widgetType' => 'button',
-				'settings'   => array(
-					'text'               => esc_html( $cta_text ),
-					'link'               => array( 'url' => esc_url_raw( $cta_url ) ),
-					'align'              => 'center',
-					'size'               => 'lg',
-					'button_text_color'  => $secondary,
-					'background_color'   => '#ffffff',
-					'border_radius'      => array( 'unit' => 'px', 'top' => 8, 'right' => 8, 'bottom' => 8, 'left' => 8 ),
-					'typography_font_weight' => '700',
-				),
-			),
-		);
-
-		return array(
-			'id'       => self::generate_id(),
-			'elType'   => 'section',
-			'settings' => array(
-				'layout'                => 'boxed',
-				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 30, 'bottom' => 80, 'left' => 30, 'isLinked' => false ),
-				'background_background' => 'classic',
-				'background_color'      => $primary,
-			),
-			'elements' => array(
-				array(
-					'id'       => self::generate_id(),
-					'elType'   => 'column',
-					'settings' => array( '_column_size' => 100 ),
-					'elements' => $widgets,
-				),
-			),
-		);
-	}
-
-	/**
-	 * Build About / Split Section
-	 */
-	private static function build_about_section( $sec, $primary, $secondary, $text_dark ) {
-		$title     = ! empty( $sec['title'] ) ? $sec['title'] : 'Our Story & Purpose';
-		$content   = ! empty( $sec['content'] ) ? $sec['content'] : 'We build innovative tools to empower modern brands to communicate effectively, convert traffic, and scale faster than ever.';
-		$image_url = ! empty( $sec['image_url'] ) ? $sec['image_url'] : 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1000&auto=format&fit=crop&q=80';
-
-		return array(
-			'id'       => self::generate_id(),
-			'elType'   => 'section',
-			'settings' => array(
-				'layout'                => 'boxed',
-				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
-				'background_background' => 'classic',
-				'background_color'      => '#ffffff',
-			),
-			'elements' => array(
-				array(
-					'id'       => self::generate_id(),
-					'elType'   => 'column',
-					'settings' => array( '_column_size' => 50, 'padding' => array( 'unit' => 'px', 'top' => 10, 'right' => 30, 'bottom' => 10, 'left' => 10, 'isLinked' => false ) ),
-					'elements' => array(
-						array(
-							'id'         => self::generate_id(),
-							'elType'     => 'widget',
-							'widgetType' => 'image',
-							'settings'   => array(
-								'image'         => array( 'url' => esc_url_raw( $image_url ) ),
-								'image_size'    => 'full',
-								'border_radius' => array( 'unit' => 'px', 'top' => 12, 'right' => 12, 'bottom' => 12, 'left' => 12 ),
-							),
-						),
-					),
-				),
-				array(
-					'id'       => self::generate_id(),
-					'elType'   => 'column',
-					'settings' => array( '_column_size' => 50, 'padding' => array( 'unit' => 'px', 'top' => 10, 'right' => 10, 'bottom' => 10, 'left' => 30, 'isLinked' => false ) ),
 					'elements' => array(
 						array(
 							'id'         => self::generate_id(),
@@ -723,9 +743,10 @@ class OmniCraft_AI_Elementor_Compiler {
 							'settings'   => array(
 								'title'       => esc_html( $title ),
 								'header_size' => 'h2',
+								'align'       => 'center',
 								'title_color' => $secondary,
-								'typography_font_size'   => array( 'unit' => 'px', 'size' => 34 ),
-								'typography_font_weight' => '700',
+								'typography_font_size'   => array( 'unit' => 'px', 'size' => 36 ),
+								'typography_font_weight' => '800',
 							),
 						),
 						array(
@@ -733,7 +754,18 @@ class OmniCraft_AI_Elementor_Compiler {
 							'elType'     => 'widget',
 							'widgetType' => 'text-editor',
 							'settings'   => array(
-								'editor' => '<div style="font-size: 16px; line-height: 1.7; color: #475569; margin-top: 15px;">' . wpautop( esc_html( $content ) ) . '</div>',
+								'editor' => '<p style="text-align:center; color:#64748b; font-size:17px; max-width:650px; margin:12px auto 35px auto;">' . esc_html( $subtitle ) . '</p>',
+							),
+						),
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'accordion',
+							'settings'   => array(
+								'tabs'              => $accordion_tabs,
+								'title_color'       => $secondary,
+								'tab_active_color'  => $primary,
+								'border_color'      => '#e2e8f0',
 							),
 						),
 					),
@@ -743,55 +775,68 @@ class OmniCraft_AI_Elementor_Compiler {
 	}
 
 	/**
-	 * Build Stats Section
+	 * Build High-Converting Call to Action (CTA) Section
 	 */
-	private static function build_stats_section( $sec, $primary, $secondary, $bg_light ) {
-		$items = ! empty( $sec['items'] ) && is_array( $sec['items'] ) ? $sec['items'] : array();
-		if ( empty( $items ) ) {
-			$items = array(
-				array( 'number' => '99.9', 'suffix' => '%', 'title' => 'Uptime SLA' ),
-				array( 'number' => '500', 'suffix' => 'K+', 'title' => 'Happy Users' ),
-				array( 'number' => '24', 'suffix' => '/7', 'title' => 'Expert Support' ),
-				array( 'number' => '10', 'suffix' => 'x', 'title' => 'Faster Deployments' ),
-			);
-		}
+	private static function build_cta_section( $sec, $primary, $secondary, $accent ) {
+		$title    = ! empty( $sec['title'] ) ? $sec['title'] : 'Ready to Transform Your Legal, Risk, and HR Operations?';
+		$subtitle = ! empty( $sec['subtitle'] ) ? $sec['subtitle'] : 'Join thousands of leading global enterprises and unite your teams with automated, AI-driven compliance today.';
+		$cta_text = ! empty( $sec['cta_text'] ) ? $sec['cta_text'] : 'Schedule an Executive Demo';
+		$cta_url  = ! empty( $sec['cta_url'] ) ? $sec['cta_url'] : '#contact';
 
-		$columns = array();
-		$col_size = 100 / max( 1, count( $items ) );
-
-		foreach ( $items as $item ) {
-			$columns[] = array(
-				'id'       => self::generate_id(),
-				'elType'   => 'column',
-				'settings' => array( '_column_size' => $col_size, 'align' => 'center' ),
-				'elements' => array(
-					array(
-						'id'         => self::generate_id(),
-						'elType'     => 'widget',
-						'widgetType' => 'counter',
-						'settings'   => array(
-							'starting_number' => 0,
-							'ending_number'   => (int) ( ! empty( $item['number'] ) ? floatval( $item['number'] ) : 100 ),
-							'suffix'          => ! empty( $item['suffix'] ) ? $item['suffix'] : '+',
-							'title'           => ! empty( $item['title'] ) ? $item['title'] : 'Metric',
-							'number_color'    => $primary,
-							'title_color'     => $secondary,
-						),
-					),
-				),
-			);
-		}
+		$cta_html = '
+		<div style="background:linear-gradient(135deg, ' . esc_attr( $secondary ) . ' 0%, #001233 100%); border-radius:24px; padding:70px 40px; text-align:center; box-shadow:0 25px 50px -12px rgba(0,0,0,0.25); position:relative; overflow:hidden;">
+			<div style="display:inline-block; margin-bottom:16px;">
+				<span style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1px; padding:6px 16px; border-radius:999px;">
+					✦ UNLEASH ENTERPRISE AGILITY
+				</span>
+			</div>
+			<h2 style="font-size:42px; font-weight:850; color:#ffffff; max-width:780px; margin:0 auto 16px auto; line-height:1.2; letter-spacing:-0.02em;">
+				' . esc_html( $title ) . '
+			</h2>
+			<p style="font-size:18px; line-height:1.6; color:#94a3b8; max-width:620px; margin:0 auto 36px auto;">
+				' . esc_html( $subtitle ) . '
+			</p>
+			<div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
+				<a href="' . esc_url( $cta_url ) . '" style="background:' . esc_attr( $primary ) . '; color:#ffffff; padding:16px 36px; border-radius:10px; font-weight:700; font-size:16px; text-decoration:none; box-shadow:0 10px 25px rgba(0,0,0,0.2); display:inline-flex; align-items:center; gap:8px;">
+					' . esc_html( $cta_text ) . ' <i class="fa-solid fa-arrow-right"></i>
+				</a>
+				<a href="#solutions" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#ffffff; padding:15px 30px; border-radius:10px; font-weight:600; font-size:16px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+					Explore All Solutions
+				</a>
+			</div>
+			<div style="display:flex; align-items:center; justify-content:center; gap:24px; margin-top:32px; font-size:13px; color:#64748b; font-weight:600; flex-wrap:wrap;">
+				<span style="color:#94a3b8;"><i class="fa-solid fa-check" style="color:' . esc_attr( $primary ) . '; margin-right:6px;"></i> SOC2 Type II Certified</span>
+				<span style="color:#94a3b8;"><i class="fa-solid fa-check" style="color:' . esc_attr( $primary ) . '; margin-right:6px;"></i> 14-Day Enterprise Evaluation</span>
+				<span style="color:#94a3b8;"><i class="fa-solid fa-check" style="color:' . esc_attr( $primary ) . '; margin-right:6px;"></i> Dedicated Implementation Team</span>
+			</div>
+		</div>';
 
 		return array(
 			'id'       => self::generate_id(),
 			'elType'   => 'section',
 			'settings' => array(
 				'layout'                => 'boxed',
-				'padding'               => array( 'unit' => 'px', 'top' => 50, 'right' => 20, 'bottom' => 50, 'left' => 20, 'isLinked' => false ),
+				'padding'               => array( 'unit' => 'px', 'top' => 80, 'right' => 20, 'bottom' => 80, 'left' => 20, 'isLinked' => false ),
 				'background_background' => 'classic',
-				'background_color'      => $bg_light,
+				'background_color'      => '#f8fafc',
+				'_css_id'               => 'cta',
+				'_animation'            => 'fadeInUp',
 			),
-			'elements' => $columns,
+			'elements' => array(
+				array(
+					'id'       => self::generate_id(),
+					'elType'   => 'column',
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => self::generate_id(),
+							'elType'     => 'widget',
+							'widgetType' => 'text-editor',
+							'settings'   => array( 'editor' => $cta_html ),
+						),
+					),
+				),
+			),
 		);
 	}
 

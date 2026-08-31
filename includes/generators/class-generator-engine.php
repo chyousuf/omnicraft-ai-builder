@@ -127,9 +127,30 @@ class OmniCraft_AI_Generator_Engine {
 			return $site_data;
 		}
 
-		// Apply custom color overrides if specified by user
+		// Apply custom color overrides if specified by user, or adopt from reference website
 		if ( ! empty( $custom_primary ) ) {
 			$site_data['color_palette']['primary'] = $custom_primary;
+		} elseif ( ! empty( $scraped_data['color_hints'] ) ) {
+			// Intelligently assign vibrant accent and dark contrast from scraped colors
+			$hints = $scraped_data['color_hints'];
+			foreach ( $hints as $hex ) {
+				$hex_clean = trim( $hex );
+				if ( strlen( $hex_clean ) === 4 ) {
+					$hex_clean = '#' . $hex_clean[1] . $hex_clean[1] . $hex_clean[2] . $hex_clean[2] . $hex_clean[3] . $hex_clean[3];
+				}
+				// Look for deep dark navy/slate for secondary
+				if ( preg_match( '/^#(0[0-9a-f]{5}|1[0-9a-f]{5}|2[0-9a-f]{5})/i', $hex_clean ) && empty( $scraped_sec ) ) {
+					$scraped_sec = $hex_clean;
+				} elseif ( ! empty( $hex_clean ) && empty( $scraped_pri ) && ! in_array( strtolower( $hex_clean ), array( '#ffffff', '#fff', '#f8fafc', '#eff4fa' ), true ) ) {
+					$scraped_pri = $hex_clean;
+				}
+			}
+			if ( ! empty( $scraped_pri ) ) {
+				$site_data['color_palette']['primary'] = $scraped_pri;
+			}
+			if ( ! empty( $scraped_sec ) ) {
+				$site_data['color_palette']['secondary'] = $scraped_sec;
+			}
 		}
 		if ( ! empty( $custom_secondary ) ) {
 			$site_data['color_palette']['secondary'] = $custom_secondary;

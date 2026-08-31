@@ -74,7 +74,7 @@ class OmniCraft_AI_URL_Scraper {
 		// Suppress libxml warnings
 		libxml_use_internal_errors( true );
 		$dom = new DOMDocument();
-		$dom->loadHTML( mb_convert_encoding( $html, 'HTML-ENTITIES', 'UTF-8' ) );
+		$dom->loadHTML( '<?xml encoding="utf-8" ?>' . $html );
 		libxml_clear_errors();
 
 		$xpath = new DOMXPath( $dom );
