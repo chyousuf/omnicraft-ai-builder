@@ -3,9 +3,9 @@
  * Plugin Name:       OmniCraft AI — Multi-Modal Website Builder
  * Plugin URI:        https://example.com/omnicraft-ai-builder
  * Description:       Generate complete, high-converting WordPress pages in seconds using Text Prompts, Screenshots (Vision AI), or Reference URLs. Native Elementor & Gutenberg support with 100% White-Label capability.
- * Version:           1.0.0
- * Author:            OmniCraft Studio
- * Author URI:        https://example.com
+ * Version:           1.2.0
+ * Author:            Chaudhry Yousuf
+ * Author URI:        https://github.com/chyousuf
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       omnicraft-ai-builder

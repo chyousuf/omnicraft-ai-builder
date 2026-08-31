@@ -46,5 +46,9 @@ Fully native support for both **Elementor** (drag-and-drop widgets) and **Gutenb
 
 ---
 
+## 👤 Author
+**Chaudhry Yousuf**  
+GitHub: [@chyousuf](https://github.com/chyousuf)
+
 ## 📄 License
 GPL-2.0+ License.
